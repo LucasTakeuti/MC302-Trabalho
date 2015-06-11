@@ -8,13 +8,13 @@ public class GameMain implements Runnable {
 	public static final long serialVersionID = 1L;
 	
 	//variaveis do Game Loop
-	private static final int FPS = 60;
+	private static final int FPS = 1;
 	private static final int FrameDuration = 1000/FPS;
 	private long nextFrame = System.currentTimeMillis() + FrameDuration;
 	private long sleepTime = 0;
 	
 	private GameModel model;
-	//private GameView view;
+	private GameView view;
 	//private GameController controller;
 	
 	private boolean running;
@@ -31,15 +31,15 @@ public class GameMain implements Runnable {
 	
 	public void run() {
 		
-		GameModel model = new GameModel();
-		GameView view = new GameView(model);
+		model = new GameModel();
+		view = new GameView(model);
 		
 		running = true;
 		
 		while (running) {
 			
 			//update -> model
-			view.render();
+			view.renderAscii();
 			
 			sleepTime = nextFrame - System.currentTimeMillis();
 			

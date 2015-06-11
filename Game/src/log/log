@@ -1,0 +1,8 @@
+Log de atividades:
+
+- Model implementado independente do View, e com métodos de acesso as informações importantes para o View.
+  Protocolo:
+	a = ar, não-sólido, não ocorre colisão.
+	t = terreno, sólido, ocorre colisão.
+	numeros 1-9 = players, o pixel com o numero deve ser o pixel do canto inferior esquerdo do player
+-mauk

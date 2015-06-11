@@ -21,6 +21,18 @@ public class GameModel {
 	}
 	
 	public char[][] getMap(){
-		return map;
+		return mapCopy();
+	}
+	
+	private char[][] mapCopy(){
+		
+		char [][] copy = new char[mapDim[0]][mapDim[1]];
+		
+		for (int i = 0; i < mapDim[0]; i++) {
+			for (int j = 0; j < mapDim[1]; j++) {
+				copy[i][j] = map[i][j];
+			}
+		}
+		return copy;
 	}
 }
