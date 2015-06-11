@@ -1,6 +1,7 @@
 package game;
 
 import game.model.GameModel;
+import game.view.GameView;
 
 public class GameMain implements Runnable {
 	
@@ -30,12 +31,15 @@ public class GameMain implements Runnable {
 	
 	public void run() {
 		
+		GameModel model = new GameModel();
+		GameView view = new GameView(model);
+		
 		running = true;
 		
 		while (running) {
 			
 			//update -> model
-			//draw -> view
+			view.render();
 			
 			sleepTime = nextFrame - System.currentTimeMillis();
 			
@@ -46,12 +50,8 @@ public class GameMain implements Runnable {
 				catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-			}
-			
-			System.out.println("dormi por " + sleepTime + " milissegundos.");
-			
+			}	
 			nextFrame = System.currentTimeMillis() + FrameDuration;
-			
 		}
 	}
 }
