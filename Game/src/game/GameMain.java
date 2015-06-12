@@ -9,9 +9,9 @@ public class GameMain implements Runnable {
 	public static final long serialVersionID = 1L;
 	
 	//variaveis do Game Loop
-	private static final int FPS = 30;
+	private static final int FPS = 60;
 	public static final double FrameDuration = 1000/(double)FPS;
-	public static final double FrameDurationInSecs = (FrameDuration/1000)/2;
+	public static final double FrameDurationInSecs = (FrameDuration/1000);
 	private long nextFrame = (long) (System.currentTimeMillis() + FrameDuration);
 	private long sleepTime = 0;
 	

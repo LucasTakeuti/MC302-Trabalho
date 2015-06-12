@@ -13,6 +13,7 @@ public class MapData {
 	private char[][] map = new char[mapDim[0]][mapDim[1]];
 	private char[][] terrain = new char[mapDim[0]][mapDim[1]];
 	private ArrayList<Physicable> PhysicsList;
+	private CollisionLogic collider;
 	
 	public static MapData getInstance() {
 		if (m == null)
@@ -24,6 +25,7 @@ public class MapData {
 		PhysicsList = new ArrayList<Physicable>();
 		terrain = reader.readFile();
 		map = mapCopy(terrain);
+		collider = new CollisionLogic(terrain);
 	}
 	
 	public void updateMap() {
@@ -33,10 +35,18 @@ public class MapData {
 		for (int i = 0; i < PhysicsList.size(); i++)
 			PhysicsList.get(i).update();
 		
+		collider.checkCollision(getPhysicsList());
+		
 		for (int i = 0; i < PhysicsList.size(); i++)
-			PhysicsList.get(i).putIntoMap(map);
+			putIntoMap(PhysicsList.get(i));
 	}
 	
+	private void putIntoMap(Physicable obj) {
+		
+		map[obj.getYfloor()][obj.getXfloor()] = 'p';
+		
+	}
+
 	public void addToObservedList(Physicable p) {
 		PhysicsList.add(p);
 	}

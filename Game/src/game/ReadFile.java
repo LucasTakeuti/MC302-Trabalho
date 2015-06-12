@@ -1,7 +1,7 @@
 package game;
 
 import java.io.File;
-import java.util.Arrays;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class ReadFile {
@@ -58,7 +58,7 @@ public class ReadFile {
 			f = new File("src/resources/" + path);
 			s = new Scanner(f);
 		}
-		catch (Exception e) {
+		catch (IOException e) {
 			System.out.println("Could not find file");
 		}
 	}
