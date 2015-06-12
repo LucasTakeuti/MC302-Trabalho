@@ -1,6 +1,7 @@
 package game;
 
-import game.model.GameModel;
+import game.model.MapData;
+import game.model.BasicProjectile;
 import game.view.GameView;
 
 public class GameMain implements Runnable {
@@ -8,12 +9,13 @@ public class GameMain implements Runnable {
 	public static final long serialVersionID = 1L;
 	
 	//variaveis do Game Loop
-	private static final int FPS = 1;
-	private static final int FrameDuration = 1000/FPS;
-	private long nextFrame = System.currentTimeMillis() + FrameDuration;
+	private static final int FPS = 2;
+	public static final double FrameDuration = 1000/(double)FPS;
+	public static final double FrameDurationInSecs = (FrameDuration/1000)/5;
+	private long nextFrame = (long) (System.currentTimeMillis() + FrameDuration);
 	private long sleepTime = 0;
 	
-	private GameModel model;
+	private MapData data;
 	private GameView view;
 	//private GameController controller;
 	
@@ -29,16 +31,23 @@ public class GameMain implements Runnable {
 		t.start();
 	}
 	
+	//runnable
 	public void run() {
 		
-		model = new GameModel();
-		view = new GameView(model);
+		data = MapData.getInstance();
+		view = new GameView(data);
+		//controller
+		
+		//tests
+		BasicProjectile p = new BasicProjectile(1, 12);
+		BasicProjectile q = new BasicProjectile(25, 15);
 		
 		running = true;
 		
+		//game loop
 		while (running) {
 			
-			//update -> model
+			data.updateMap();
 			view.renderAscii();
 			
 			sleepTime = nextFrame - System.currentTimeMillis();
@@ -50,8 +59,8 @@ public class GameMain implements Runnable {
 				catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-			}	
-			nextFrame = System.currentTimeMillis() + FrameDuration;
+			}
+			nextFrame = (long) (System.currentTimeMillis() + FrameDuration);
 		}
 	}
 }

@@ -10,7 +10,7 @@ public class GamePanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	public void paintComponent(Graphics g) {
-        /*g.setColor(Color.RED);
+        g.setColor(Color.RED);
         g.fillRect(0, 0, 400, 400);
         
         g.setColor(Color.WHITE);
@@ -26,7 +26,7 @@ public class GamePanel extends JPanel {
         
         g.fillRect(90, 90, 40, 100);
         
-        g.fillRect(250, 190, 40, 100);*/
+        g.fillRect(250, 190, 40, 100);
     }
 }
 

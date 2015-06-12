@@ -20,13 +20,7 @@ public class GameFrame extends JFrame {
 		setLocationRelativeTo(null);
 		
 		panel = new GamePanel();
-        add(panel);
-        
-        Graphics g = panel.getGraphics();
-        
-        g.setColor(Color.RED);
-        g.fillRect(0, 0, 400, 400);
-        
+        //add(panel);
 	}
 
 }

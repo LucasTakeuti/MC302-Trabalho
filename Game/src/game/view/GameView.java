@@ -1,13 +1,13 @@
 package game.view;
 
-import game.model.GameModel;
+import game.model.MapData;
 
 public class GameView {
 	
-	GameModel model;
+	MapData model;
 	GameFrame frame;
 	
-	public GameView(GameModel model){
+	public GameView(MapData model){
 		this.model = model;
 		this.frame = new GameFrame();
 		frame.setVisible(true);
