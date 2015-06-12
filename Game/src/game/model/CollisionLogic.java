@@ -24,21 +24,23 @@ public class CollisionLogic {
 	}
 	
 	private boolean hasCollision(Physicable obj) {
-		
-		if (obj.getYfloor() >= MapData.getInstance().getMapHeight() || obj.getYfloor() <= 0 ||
-			obj.getXfloor() >= MapData.getInstance().getMapWidth() || obj.getXfloor() <= 0 ||
-			terrain[obj.getYfloor()][obj.getXfloor()] == 't')
-			return true;
-		else
-			return false;
-		
+		return (hasHitBounds(obj) || hasHitSolid(obj));
+	}
+	
+	private boolean hasHitBounds(Physicable obj) {
+		return (obj.getYfloor() >= MapData.getInstance().getMapHeight() || obj.getYfloor() <= 0 ||
+				obj.getXfloor() >= MapData.getInstance().getMapWidth() || obj.getXfloor() <= 0);
+	}
+	
+	private boolean hasHitSolid(Physicable obj) {
+		return (Physics.solids.contains(terrain[obj.getYfloor()][obj.getXfloor()]));
 	}
 	
 	private void destroyTerrain(Physicable obj, int explosionRadius) {
 		for (int i = Math.max(0, obj.getYfloor() - explosionRadius); i < Math.min(MapData.getInstance().getMapHeight(), obj.getYfloor() + explosionRadius); i++)
 			for (int j = Math.max(0, obj.getXfloor() - explosionRadius); j < Math.min(MapData.getInstance().getMapWidth(), obj.getXfloor() + explosionRadius); j++)
 				if (distanceTo(i, j, obj.getYfloor(), obj.getXfloor()) <= explosionRadius)
-					terrain[i][j] = 'a';
+					terrain[i][j] = Physics.fluids.get(Physics.DEFAULT_FLUID);
 	}
 	
 	private double distanceTo(int x1, int y1, int x2, int y2) {

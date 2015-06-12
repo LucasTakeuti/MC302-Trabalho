@@ -1,7 +1,5 @@
 package game.model;
 
-import game.GameMain;
-
 public class BasicProjectile extends Projectile implements Physicable {
 	
 	//(coluna, linha)
@@ -12,8 +10,8 @@ public class BasicProjectile extends Projectile implements Physicable {
 		setVelX(5);
 		setVelY(-11);
 		
-		setAccelX(Physics.gX);
-		setAccelY(Physics.gY);
+		setAccelX(Physics.gravityX);
+		setAccelY(Physics.gravityY);
 		
 		setMass(1);
 		setExplosionRadius(5);

@@ -1,7 +1,7 @@
 package game;
 
-import game.model.MapData;
 import game.model.BasicProjectile;
+import game.model.MapData;
 import game.view.GameView;
 
 public class GameMain implements Runnable {
