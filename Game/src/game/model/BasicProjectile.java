@@ -46,9 +46,23 @@ public class BasicProjectile extends Projectile implements Physicable {
 		setVelX(getVelX() + getAccelX() * GameMain.FrameDurationInSecs);
 		setVelY(getVelY() + getAccelY() * GameMain.FrameDurationInSecs);
 		
-		
+		if(checkCollision(MapData.getInstance().getTerrain())) {
+			MapData.getInstance().deleteFromObservedList(this);
+			destroyTerrain(MapData.getInstance().getTerrain(), getExplosionRadius());
+		}
 	}
 	
+
+	private void destroyTerrain(char[][] terrain, int explosionRadius) {
+		for (int i = Math.max(0, getYfloor() - explosionRadius); i < Math.min(MapData.getInstance().getMapHeight(), getYfloor() + explosionRadius); i++)
+			for (int j = Math.max(0, getXfloor() - explosionRadius); j < Math.min(MapData.getInstance().getMapWidth(), getXfloor() + explosionRadius); j++)
+				if (distanceTo(i, j, getYfloor(), getXfloor()) <= explosionRadius)
+					terrain[i][j] = 'a';
+	}
+	
+	private double distanceTo(int x1, int y1, int x2, int y2) {
+		return (Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2)));
+	}
 
 	@Override
 	public void putIntoMap(char[][] map) {
@@ -56,9 +70,14 @@ public class BasicProjectile extends Projectile implements Physicable {
 		//if (y > 0 && y < 15 && x > 0 && x < 60)
 			map[getYfloor()][getXfloor()] = 'p';
 		
-		System.out.println("x: " + getX() + " y: " + getY());
-
-		System.out.println("vx: " + getVelX() + " vy: " + getVelY());
+	}
+	
+	public boolean checkCollision(char[][] map) {
+		
+		if (map[getYfloor()][getXfloor()] == 't')
+			return true;
+		else
+			return false;
 		
 	}
 	

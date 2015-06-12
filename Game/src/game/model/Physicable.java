@@ -6,4 +6,6 @@ public interface Physicable {
 
 	public void putIntoMap(char[][] map);
 
+	public boolean checkCollision(char[][] map);
+
 }

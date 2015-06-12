@@ -11,6 +11,7 @@ public class MapData {
 	private ReadFile reader = new ReadFile("mapa.txt");
 	private int[] mapDim = reader.fileLength();
 	private char[][] map = new char[mapDim[0]][mapDim[1]];
+	private char[][] terrain = new char[mapDim[0]][mapDim[1]];
 	private ArrayList<Physicable> PhysicsList;
 	
 	public static MapData getInstance() {
@@ -21,14 +22,19 @@ public class MapData {
 	
 	private MapData() {
 		PhysicsList = new ArrayList<Physicable>();
-		map = reader.readFile();
+		terrain = reader.readFile();
+		map = mapCopy(terrain);
 	}
 	
 	public void updateMap() {
-		for (int i = 0; i < PhysicsList.size(); i++) {
+		
+		resetMap();
+		
+		for (int i = 0; i < PhysicsList.size(); i++)
 			PhysicsList.get(i).update();
+		
+		for (int i = 0; i < PhysicsList.size(); i++)
 			PhysicsList.get(i).putIntoMap(map);
-		}
 	}
 	
 	public void addToObservedList(Physicable p) {
@@ -43,19 +49,27 @@ public class MapData {
 		return PhysicsList;
 	}
 	
-	public int getMapHeight(){
+	public int getMapHeight() {
 		return mapDim[0];
 	}
 	
-	public int getMapWidth(){
+	public int getMapWidth() {
 		return mapDim[1];
 	}
 	
-	public char[][] getMap(){
-		return mapCopy();
+	public char[][] getTerrain() {
+		return terrain;
 	}
 	
-	private char[][] mapCopy(){
+	public char[][] getMap() {
+		return mapCopy(map);
+	}
+	
+	private void resetMap() {
+		map = mapCopy(terrain);
+	}
+	
+	private char[][] mapCopy(char[][] map) {
 		
 		char [][] copy = new char[mapDim[0]][mapDim[1]];
 		
@@ -66,4 +80,5 @@ public class MapData {
 		}
 		return copy;
 	}
+
 }
