@@ -33,13 +33,6 @@ public class GameView {
 		frame.add(text);
 	}
 	
-	public void renderAsciiConsole() {
-		
-		for (int i = 0; i < data.getMapHeight(); i++)
-			System.out.println(data.getMap()[i]);
-		
-	}
-	
 	public void renderAsciiFrame() {
 		
 		StringBuilder s = new StringBuilder();
