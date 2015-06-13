@@ -55,7 +55,6 @@ public class MapData {
 	}
 	
 	public Shooter getShooter(int id) {
-		System.out.println("id: " + id);
 		for (int i = 0; i < PhysicsList.size(); i++) {
 			if (PhysicsList.get(i) instanceof Shooter) {
 				Shooter s = (Shooter) PhysicsList.get(i);
@@ -66,8 +65,18 @@ public class MapData {
 		return null;
 	}
 	
+	public int getShooterID(int i, int j) {
+		for (int k = 0; k < PhysicsList.size(); k++) {
+			if (PhysicsList.get(k) instanceof Shooter) {
+				Shooter s = (Shooter) PhysicsList.get(k);
+				if (i == s.getYfloor() && j == s.getXfloor())
+					return s.getID();
+			}
+		}
+		return -1;
+	}
+	
 	public boolean isShooter(int i, int j) {
-		System.out.println("i: " + i + " j: " + j);
 		for (int k = 0; k < PhysicsList.size(); k++) {
 			if (PhysicsList.get(k) instanceof Shooter) {
 				Shooter s = (Shooter) PhysicsList.get(k);

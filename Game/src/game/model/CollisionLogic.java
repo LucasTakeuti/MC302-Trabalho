@@ -74,11 +74,25 @@ public class CollisionLogic {
 		return (obj.getXfloor() < 0);
 	}	
 	
+	private boolean hasHitTerrain(Physicable obj) {
+		return (Physics.solids.contains(terrain[obj.getYfloor()][obj.getXfloor()]));
+	}
+	
+	private boolean hasHitPhysicable(Physicable obj) {
+		for (int k = 0; k < MapData.getInstance().getPhysicsList().size(); k++) {
+			Physicable p = MapData.getInstance().getPhysicsList().get(k);
+			if (p != obj && p.getYfloor() == obj.getYfloor() && p.getXfloor() == obj.getXfloor()) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	private boolean hasHitSolid(Physicable obj) {
 		if (!hasHitBounds(obj))
-			return (Physics.solids.contains(terrain[obj.getYfloor()][obj.getXfloor()]));
-		else
-			return false;
+			if (hasHitTerrain(obj) || hasHitPhysicable(obj))
+				return true;
+		return false;
 	}
 	
 	private void destroyTerrain(Physicable obj, int explosionRadius) {
@@ -93,9 +107,14 @@ public class CollisionLogic {
 			for (int j = Math.max(0, obj.getXfloor() - explosionRadius); j < Math.min(MapData.getInstance().getMapWidth(), obj.getXfloor() + explosionRadius); j++)
 				if (distanceofAToB(i, j, obj.getYfloor(), obj.getXfloor()) <= explosionRadius)
 					if (MapData.getInstance().isShooter(i, j)) {
-						System.out.println("char: " + MapData.getInstance().getMap()[j][i]);
-						//MapData.getInstance().getShooter(Character.getNumericValue(MapData.getInstance().getMap()[i][j]).setLife(0);
+						Shooter s = MapData.getInstance().getShooter(MapData.getInstance().getShooterID(i, j));
+						s.setLife(s.getLife() - damageAmount(distanceofAToB(j, i, obj.getXfloor(), obj.getYfloor()), explosionRadius));
+						s.setVisible(false);
 					}
+	}
+	
+	private double damageAmount(double distance, int explosionRadius) {
+		return Shooter.MAX_LIFE * (1 - (distance/explosionRadius));
 	}
 	
 	private double distanceofAToB(int xa, int ya, int xb, int yb) {

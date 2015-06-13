@@ -1,6 +1,6 @@
 package game;
 
-import game.model.BasicProjectile;
+import game.controller.GameController;
 import game.model.MapData;
 import game.model.Shooter;
 import game.view.GameView;
@@ -18,7 +18,7 @@ public class GameMain implements Runnable {
 	
 	private MapData data;
 	private GameView view;
-	//private GameController controller;
+	private GameController controller;
 	
 	private boolean running;
 	private Thread t;
@@ -37,10 +37,9 @@ public class GameMain implements Runnable {
 		
 		data = MapData.getInstance();
 		view = new GameView(data);
-		//controller
+		controller = new GameController(data, view);
 		
 		//tests
-		BasicProjectile bp = new BasicProjectile(3, 0, 1, 0);
 		Shooter s1 = new Shooter(3, 11);
 		
 		running = true;

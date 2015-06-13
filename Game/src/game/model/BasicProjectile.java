@@ -3,7 +3,7 @@ package game.model;
 public class BasicProjectile extends Projectile {
 	
 	//(coluna, linha)
-	public BasicProjectile(int x, int y, int vx, int vy) {
+	public BasicProjectile(int x, int y, double vx, double vy) {
 		
 		super(x,y);
 		

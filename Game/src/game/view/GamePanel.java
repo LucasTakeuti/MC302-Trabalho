@@ -9,7 +9,7 @@ public class GamePanel extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	
-	public void paintComponent(Graphics g) {
+	public void paintSwastika(Graphics g) {
         g.setColor(Color.RED);
         g.fillRect(0, 0, 400, 400);
         

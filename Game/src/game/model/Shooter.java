@@ -3,20 +3,24 @@ package game.model;
 public class Shooter extends Physicable {
 	
 	//Campos
+	public static final double MAX_LIFE = 100;
+	
 	private final int ID;
 	private double life;
 	private boolean thrown;
+	private boolean invulnerable;
 	
 	//Constructor
 	public Shooter(int x, int y) {
 		super(x, y);
-		setLife(100);
+		setLife(MAX_LIFE);
 		ID = nextID();
 		setThrown(false);
+		setInvulnerable(false);
 	}
 	
-	public void shoot(int vx, int vy) {
-		BasicProjectile bp = new BasicProjectile(getXfloor(), getYfloor(), vx, vy);
+	public void shoot(double vx, double vy) {
+		BasicProjectile bp = new BasicProjectile(getXfloor(), getYfloor()-1, vx, vy);
 	}
 	
 	//Getters and Setters
@@ -48,6 +52,14 @@ public class Shooter extends Physicable {
 			if (MapData.getInstance().getPhysicsList().get(i) instanceof Shooter)
 				id++;
 		return id;
+	}
+
+	public boolean isInvulnerable() {
+		return invulnerable;
+	}
+
+	public void setInvulnerable(boolean invulnerable) {
+		this.invulnerable = invulnerable;
 	}
 	
 }

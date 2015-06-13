@@ -4,14 +4,25 @@ import game.model.MapData;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 public class GameView {
 	
-	MapData data;
-	GameFrame frame;
-	JTextArea text;
+	private MapData data;
+	
+	private GameFrame frame;
+	
+	private GamePanel panel;
+	
+	private JTextArea screenAscii;
+	private JTextField powerField;
+	private JTextField angleField;
+	private JButton shootButton;
 	
 	public GameView(MapData data){
 		this.data = data;
@@ -19,20 +30,53 @@ public class GameView {
 		this.frame = new GameFrame();
 		frame.setVisible(true);
 		
-		text = new JTextArea();
-		text.setColumns(data.getMapWidth());
-		text.setRows(data.getMapHeight());
-		text.setEditable(false);
+		//tests - nao apague//
+		screenAscii = new JTextArea();
+		screenAscii.setColumns(data.getMapWidth());
+		screenAscii.setRows(data.getMapHeight());
+		screenAscii.setEditable(false);
 		
 		Font f = new Font("Courier", 3, 10); //monospace, negrito, tamanho 8
 		
-		text.setFont(f);
-		text.setBackground(Color.BLACK);
-		text.setForeground(new Color(255, 255, 255, 200));
-		text.setSize(data.getMapWidth(), data.getMapHeight());
+		screenAscii.setFont(f);
+		screenAscii.setBackground(Color.BLACK);
+		screenAscii.setForeground(new Color(255, 255, 255, 200));
+		screenAscii.setSize(data.getMapWidth(), data.getMapHeight());
 		
-		frame.add(text);
 		
+		//tests - nao apague//
+		panel = new GamePanel();
+		
+		powerField = new JTextField("22", 5);
+		angleField = new JTextField("55", 5);
+		
+		shootButton = new JButton("Shoot!");
+		
+		panel.add(screenAscii);
+		panel.add(powerField);
+		panel.add(angleField);
+		panel.add(shootButton);
+		
+		frame.add(panel);
+		
+		shootButton.requestFocus();
+		
+	}
+	
+	public double getPower() {
+		return Double.parseDouble(powerField.getText());
+	}
+	
+	public double getAngle() {
+		return Double.parseDouble(angleField.getText());
+	}
+	
+	public void addShootListener(ActionListener shoot) {
+		shootButton.addActionListener(shoot);
+	}
+	
+	public void displayErrorMessage(String errorMessage) {
+		JOptionPane.showMessageDialog(frame, errorMessage);
 	}
 	
 	public void renderAsciiConsole() {
@@ -51,9 +95,9 @@ public class GameView {
 		
 		String ss = s.toString();
 		
-		text.setText(ss);
+		screenAscii.setText(ss);
 		
-		text.repaint();
+		screenAscii.repaint();
 		
 	}
 	

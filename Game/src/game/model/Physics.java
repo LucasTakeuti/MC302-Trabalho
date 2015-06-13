@@ -20,4 +20,12 @@ public class Physics {
 		return initState + initVector * deltaTime;
 	}
 	
+	public static double getXComponent (double vector, double angle) {
+		return vector * Math.cos(Math.toRadians(angle));
+	}
+	
+	public static double getYComponent (double vector, double angle) {
+		return vector * Math.sin(Math.toRadians(angle));
+	}
+	
 }
