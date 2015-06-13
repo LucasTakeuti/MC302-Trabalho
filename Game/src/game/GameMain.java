@@ -49,7 +49,7 @@ public class GameMain implements Runnable {
 		while (running) {
 			
 			data.updateMap();
-			view.renderAscii();
+			view.renderAsciiFrame();
 			
 			sleepTime = nextFrame - System.currentTimeMillis();
 			

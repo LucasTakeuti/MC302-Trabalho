@@ -15,11 +15,6 @@ public class Shooter extends Physicable {
 		setThrown(false);
 	}
 	
-	public void update() {
-		super.update();
-		System.out.println("life: " + getLife());
-	}
-	
 	public void shoot(int vx, int vy) {
 		BasicProjectile bp = new BasicProjectile(getXfloor(), getYfloor(), vx, vy);
 	}

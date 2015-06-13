@@ -83,12 +83,12 @@ public class CollisionLogic {
 	private void destroyTerrain(Physicable obj, int explosionRadius) {
 		for (int i = Math.max(0, obj.getYfloor() - explosionRadius); i < Math.min(MapData.getInstance().getMapHeight(), obj.getYfloor() + explosionRadius); i++)
 			for (int j = Math.max(0, obj.getXfloor() - explosionRadius); j < Math.min(MapData.getInstance().getMapWidth(), obj.getXfloor() + explosionRadius); j++)
-				if (distanceTo(i, j, obj.getYfloor(), obj.getXfloor()) <= explosionRadius)
+				if (distanceofAToB(i, j, obj.getYfloor(), obj.getXfloor()) <= explosionRadius)
 					terrain[i][j] = Physics.fluids.get(Physics.DEFAULT_FLUID);
 	}
 	
-	private double distanceTo(int x1, int y1, int x2, int y2) {
-		return (Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2))); 
+	private double distanceofAToB(int xa, int ya, int xb, int yb) {
+		return (Math.sqrt((xa-xb)*(xa-xb) + (ya-yb)*(ya-yb))); 
 	}
 
 }

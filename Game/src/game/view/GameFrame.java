@@ -1,8 +1,6 @@
 package game.view;
 
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
 
 import javax.swing.JFrame;
 
@@ -22,5 +20,7 @@ public class GameFrame extends JFrame {
 		panel = new GamePanel();
         //add(panel);
 	}
+	
+	//metodo paint(Graphics g) e chamado no construtor de JFrames
 
 }
