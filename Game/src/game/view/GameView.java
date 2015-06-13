@@ -24,13 +24,20 @@ public class GameView {
 		text.setRows(data.getMapHeight());
 		text.setEditable(false);
 		
-		Font f = new Font("Courier", 3, 8); //monospace, negrito, tamanho 8
+		Font f = new Font("Courier", 3, 10); //monospace, negrito, tamanho 8
 		
 		text.setFont(f);
 		text.setBackground(Color.BLACK);
 		text.setForeground(new Color(255, 255, 255, 200));
+		text.setSize(data.getMapWidth(), data.getMapHeight());
 		
 		frame.add(text);
+		
+	}
+	
+	public void renderAsciiConsole() {
+		for (int i = 0; i < data.getMapHeight(); i++)
+			System.out.println(data.getMap()[i]);
 	}
 	
 	public void renderAsciiFrame() {

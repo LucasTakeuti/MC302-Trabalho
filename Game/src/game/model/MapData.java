@@ -44,12 +44,38 @@ public class MapData {
 	private void putIntoMap(Physicable obj) {
 		
 		if (obj.isVisible() && !(collider.hasHitBounds(obj))) {
-			if (obj instanceof Projectile)
+			if (obj instanceof Projectile) {
 				map[obj.getYfloor()][obj.getXfloor()] = 'p';
+			}
 			
-			else if (obj instanceof Shooter)
+			else if (obj instanceof Shooter) {
 					map[obj.getYfloor()][obj.getXfloor()] = (char)(((Shooter) obj).getID() + '0');
+			}
 		}
+	}
+	
+	public Shooter getShooter(int id) {
+		System.out.println("id: " + id);
+		for (int i = 0; i < PhysicsList.size(); i++) {
+			if (PhysicsList.get(i) instanceof Shooter) {
+				Shooter s = (Shooter) PhysicsList.get(i);
+				if (id == s.getID())
+					return s;
+			}
+		}
+		return null;
+	}
+	
+	public boolean isShooter(int i, int j) {
+		System.out.println("i: " + i + " j: " + j);
+		for (int k = 0; k < PhysicsList.size(); k++) {
+			if (PhysicsList.get(k) instanceof Shooter) {
+				Shooter s = (Shooter) PhysicsList.get(k);
+				if (i == s.getYfloor() && j == s.getXfloor())
+					return true;
+			}
+		}
+		return false;
 	}
 
 	public void addToObservedList(Physicable p) {
