@@ -1,30 +1,122 @@
 package game.model;
 
-public interface Physicable {
+import game.GameMain;
+
+public abstract class Physicable {
 	
-	public void update();
+	//Campos
+	private double x;
+	private double y;
 	
-	public double getX();
-	public int getXfloor();
-	public void setX(double x);
+	private double VelX;
+	private double VelY;
 	
-	public double getY();
-	public int getYfloor();
-	public void setY(double y);
+	private double AccelX;
+	private double AccelY;
 	
-	public double getVelX();
-	public void setVelX(double xVel);
+	private double mass;
 	
-	public double getVelY();
-	public void setVelY(double yVel);
+	private boolean visible;
 	
-	public double getMass();
-	public void setMass(double mass);
+	//Constructor (colunas, linhas)
+	public Physicable(int x, int y) {
+		
+		setVisible(true);
+		
+		setX(x);
+		setY(y);
+		
+		setVelX(0);
+		setVelY(0);
+
+		setAccelX(Physics.gravityX);
+		setAccelY(Physics.gravityY);
+		
+		MapData.getInstance().addToObservedList(this);
+	}
 	
-	public double getAccelX();
-	public void setAccelX(double accelX);
+	//Methods
+	public void update() {
+		setX(Physics.step(getX(), getVelX(), GameMain.FrameDurationInSecs));
+		setY(Physics.step(getY(), getVelY(), GameMain.FrameDurationInSecs));
+
+		setVelX(Physics.step(getVelX(), getAccelX(), GameMain.FrameDurationInSecs));
+		setVelY(Physics.step(getVelY(), getAccelY(), GameMain.FrameDurationInSecs));
+		
+	}
 	
-	public double getAccelY();
-	public void setAccelY(double accelY);
+	//Getters and Setters
+	public double getX() {
+		return x;
+	}
+	public int getXfloor() {
+		return (int) Math.floor(x);
+	}
+	public void setX(double x) {
+		this.x = x;
+	}
+	
+	public double getY() {
+		return y;
+	}
+	public int getYfloor() {
+		return (int) Math.floor(y);
+	}
+	public void setY(double y) {
+		this.y = y;
+	}
+	
+	public double getVelX() {
+		return VelX;
+	}
+	public void setVelX(double xVel) {
+		this.VelX = xVel;
+	}
+	
+	public double getVelY() {
+		return VelY;
+	}
+	public void setVelY(double yVel) {
+		this.VelY = yVel;
+	}
+	
+	public double getMass() {
+		return mass;
+	}
+	public void setMass(double mass) {
+		this.mass = mass;
+	}
+
+	public double getAccelX() {
+		return AccelX;
+	}
+
+	public void setAccelX(double accelX) {
+		AccelX = accelX;
+	}
+	
+	public void resetAccelX() {
+		AccelX = Physics.gravityX;
+	}
+
+	public double getAccelY() {
+		return AccelY;
+	}
+
+	public void setAccelY(double accelY) {
+		AccelY = accelY;
+	}
+	
+	public void resetAccelY() {
+		AccelY = Physics.gravityY;
+	}
+
+	public boolean isVisible() {
+		return visible;
+	}
+
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
 
 }

@@ -12,6 +12,12 @@ public class Physics {
 	
 	public static final List<Character> fluids = Arrays.asList('a');
 	
+	public static final List<Character> id = Arrays.asList('1', '2');
+	
 	public static final int DEFAULT_FLUID = 0;
+	
+	public static double step (double initState, double initVector, double deltaTime) {
+		return initState + initVector * deltaTime;
+	}
 	
 }

@@ -2,6 +2,7 @@ package game;
 
 import game.model.BasicProjectile;
 import game.model.MapData;
+import game.model.Shooter;
 import game.view.GameView;
 
 public class GameMain implements Runnable {
@@ -9,7 +10,7 @@ public class GameMain implements Runnable {
 	public static final long serialVersionID = 1L;
 	
 	//variaveis do Game Loop
-	private static final int FPS = 60;
+	private static final int FPS = 30;
 	public static final double FrameDuration = 1000/(double)FPS;
 	public static final double FrameDurationInSecs = (FrameDuration/1000);
 	private long nextFrame = (long) (System.currentTimeMillis() + FrameDuration);
@@ -39,7 +40,8 @@ public class GameMain implements Runnable {
 		//controller
 		
 		//tests
-		BasicProjectile p = new BasicProjectile(1, 8);
+		BasicProjectile bp = new BasicProjectile(3, 0, 1, 0);
+		Shooter s1 = new Shooter(3, 11);
 		
 		running = true;
 		

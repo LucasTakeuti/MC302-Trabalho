@@ -43,8 +43,13 @@ public class MapData {
 	
 	private void putIntoMap(Physicable obj) {
 		
-		map[obj.getYfloor()][obj.getXfloor()] = 'p';
-		
+		if (obj.isVisible() && !(collider.hasHitBounds(obj))) {
+			if (obj instanceof Projectile)
+				map[obj.getYfloor()][obj.getXfloor()] = 'p';
+			
+			else if (obj instanceof Shooter)
+					map[obj.getYfloor()][obj.getXfloor()] = (char)(((Shooter) obj).getID() + '0');
+		}
 	}
 
 	public void addToObservedList(Physicable p) {
