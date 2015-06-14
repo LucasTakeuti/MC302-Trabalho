@@ -1,5 +1,7 @@
 package game.view.controles;
 
+import java.awt.event.ActionListener;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -8,7 +10,7 @@ import javax.swing.JTextField;
 public class Controle extends JPanel {
 	private JTextField powerField;
 	private JTextField angleField;
-	public JButton shootButton;
+	private JButton shootButton;
 	
 	public Controle() {
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -31,4 +33,11 @@ public class Controle extends JPanel {
 		return Double.parseDouble(this.angleField.getText());
 	}
 
+	public void bttnFocus() {
+		shootButton.requestFocus();
+	}
+	
+	public void addListener(ActionListener actionListener) {
+		shootButton.addActionListener(actionListener);
+	}
 }

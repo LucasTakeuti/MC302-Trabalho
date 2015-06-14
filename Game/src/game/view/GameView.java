@@ -32,14 +32,13 @@ public class GameView {
 		frame.setVisible(true);
 		frame.setLayout(new BorderLayout());
 		
-		//tests - nao apague//
 		panel = new Desenhador(data);
 		panel2 = new Controle();
 		
 		frame.add(panel, BorderLayout.WEST);
 		frame.add(panel2, BorderLayout.EAST);
 		
-		panel2.shootButton.requestFocus();
+		panel2.bttnFocus();
 	}
 	
 	public double getPower() {
@@ -51,7 +50,7 @@ public class GameView {
 	}
 	
 	public void addShootListener(ActionListener shoot) {
-		panel2.shootButton.addActionListener(shoot);
+		panel2.addListener(shoot);
 	}
 	
 	public void displayErrorMessage(String errorMessage) {
