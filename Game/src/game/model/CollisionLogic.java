@@ -31,26 +31,26 @@ public class CollisionLogic {
 				if (hasHitFloorBounds(obj)) {
 					obj.setY(obj.getYfloor()-1);
 					obj.setVelX(0);
-					obj.setAccelY(0);
+					obj.setThrown(false);
 					obj.setVisible(false);
 				}
 				
 				else if (hasHitRightBounds(obj)) {
 					obj.setX(obj.getXfloor()-1);
 					obj.setVelX(0);
-					obj.setAccelX(0);
+					obj.stopAccelX();
 				}
 				
 				else if (hasHitLeftBounds(obj)) {
 					obj.setX(0);
 					obj.setVelX(0);
-					obj.setAccelX(0);
+					obj.stopAccelX();
 				}
 				
 				else if (hasHitSolid(obj)) {
 					obj.setY(obj.getYfloor()-1);
 					obj.setVelX(0);
-					obj.setAccelY(0);
+					obj.setThrown(false);
 				}
 			}
 		}

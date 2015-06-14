@@ -15,7 +15,7 @@ public class GameController {
 		this.data = data;
 		this.view = view;
 		
-		playerCont = new PlayerController(); 
+		playerCont = new PlayerController(data, view);
 		shootCont = new ShootController(data, view);
 	}
 

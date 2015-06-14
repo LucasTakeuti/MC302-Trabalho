@@ -17,6 +17,7 @@ public abstract class Physicable {
 	private double mass;
 	
 	private boolean visible;
+	private boolean thrown;
 	
 	//Constructor (colunas, linhas)
 	public Physicable(int x, int y) {
@@ -95,6 +96,10 @@ public abstract class Physicable {
 		AccelX = accelX;
 	}
 	
+	public void stopAccelX() {
+		AccelX = 0;
+	}
+	
 	public void resetAccelX() {
 		AccelX = Physics.gravityX;
 	}
@@ -107,6 +112,10 @@ public abstract class Physicable {
 		AccelY = accelY;
 	}
 	
+	public void stopAccelY() {
+		AccelY = 0;
+	}
+	
 	public void resetAccelY() {
 		AccelY = Physics.gravityY;
 	}
@@ -117,6 +126,16 @@ public abstract class Physicable {
 
 	public void setVisible(boolean visible) {
 		this.visible = visible;
+	}
+	public boolean isThrown() {
+		return thrown;
+	}
+	public void setThrown(boolean thrown) {
+		if (thrown)
+			resetAccelY();
+		else
+			stopAccelY();
+		this.thrown = thrown;
 	}
 
 }

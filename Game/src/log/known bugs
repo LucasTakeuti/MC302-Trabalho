@@ -1,0 +1,6 @@
+Bug Tracker:
+
+- Shooter não para ao andar contra terreno na vertical
+	motivo: colisão com terreno é tratada colocando o shooter uma casa acima da atual
+	resolução: ??? (sugestões?)
+-mauk

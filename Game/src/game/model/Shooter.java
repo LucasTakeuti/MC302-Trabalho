@@ -7,7 +7,6 @@ public class Shooter extends Physicable {
 	
 	private final int ID;
 	private double life;
-	private boolean thrown;
 	private boolean invulnerable;
 	
 	//Constructor
@@ -23,6 +22,13 @@ public class Shooter extends Physicable {
 		BasicProjectile bp = new BasicProjectile(getXfloor(), getYfloor()-1, vx, vy);
 	}
 	
+	public void jump() {
+		if (!isThrown()) {
+			setThrown(true);
+			setVelY(Physics.jumpSpeed);
+		}
+	}
+	
 	//Getters and Setters
 	public double getLife() {
 		return life;
@@ -36,13 +42,13 @@ public class Shooter extends Physicable {
 		return ID;
 	}
 	
-	public boolean isThrown() {
-		return thrown;
+	public boolean isInvulnerable() {
+		return invulnerable;
 	}
-
-	public void setThrown(boolean thrown) {
-		this.thrown = thrown;
-	}
+	
+	public void setInvulnerable(boolean invulnerable) {
+		this.invulnerable = invulnerable;
+	}	
 	
 	private int nextID() {
 		
@@ -52,14 +58,6 @@ public class Shooter extends Physicable {
 			if (MapData.getInstance().getPhysicsList().get(i) instanceof Shooter)
 				id++;
 		return id;
-	}
-
-	public boolean isInvulnerable() {
-		return invulnerable;
-	}
-
-	public void setInvulnerable(boolean invulnerable) {
-		this.invulnerable = invulnerable;
 	}
 	
 }

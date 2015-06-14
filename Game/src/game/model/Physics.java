@@ -16,6 +16,8 @@ public class Physics {
 	
 	public static final int DEFAULT_FLUID = 0;
 	
+	public static final int jumpSpeed = -8;
+	
 	public static double step (double initState, double initVector, double deltaTime) {
 		return initState + initVector * deltaTime;
 	}

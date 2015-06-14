@@ -6,3 +6,20 @@ Log de atividades:
 	t = terreno, sólido, ocorre colisão.
 	numeros 1-9 = players, o pixel com o numero deve ser o pixel do canto inferior esquerdo do player
 -mauk
+
+TODO list:
+	- Player se move
+	- Jogadas em turnos
+	- Player pula
+	- Camera (mostra uma parte da matriz apenas)
+
+	OBS: melhorar a maneira que o Player é obtido (getShooter, getShooterID e isShooter estão muito emaranhados),
+		 isso depende do sistema de turnos ser implementado, método getCurrentShooter irá facilitar as coisas.
+
+-Outras Coisas	 
+	 - Spawner de Players
+	 - Gerador de Mapa
+	 - Referencia aos mapas por CLASSPATH
+	 - Diferentes Projeteis
+ 	- Partes do mapa que sofrem física (areia cai, shooter morre se esmagado)
+ -mauk

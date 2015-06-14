@@ -19,10 +19,12 @@ public class GameView {
 	
 	private GamePanel panel;
 	
+	// tests - nao apague
 	private JTextArea screenAscii;
 	private JTextField powerField;
 	private JTextField angleField;
 	private JButton shootButton;
+	private JButton jumpButton;
 	
 	public GameView(MapData data){
 		this.data = data;
@@ -51,11 +53,13 @@ public class GameView {
 		angleField = new JTextField("55", 5);
 		
 		shootButton = new JButton("Shoot!");
+		jumpButton = new JButton("Jump!");
 		
 		panel.add(screenAscii);
 		panel.add(powerField);
 		panel.add(angleField);
 		panel.add(shootButton);
+		panel.add(jumpButton);
 		
 		frame.add(panel);
 		
@@ -73,6 +77,10 @@ public class GameView {
 	
 	public void addShootListener(ActionListener shoot) {
 		shootButton.addActionListener(shoot);
+	}
+	
+	public void addJumpListener(ActionListener jump) {
+		jumpButton.addActionListener(jump);
 	}
 	
 	public void displayErrorMessage(String errorMessage) {
