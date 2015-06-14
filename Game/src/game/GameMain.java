@@ -47,7 +47,7 @@ public class GameMain implements Runnable {
 		//game loop
 		while (running) {
 			
-			data.updateMap();
+			controller.update();
 			view.renderAsciiFrame();
 			
 			sleepTime = nextFrame - System.currentTimeMillis();

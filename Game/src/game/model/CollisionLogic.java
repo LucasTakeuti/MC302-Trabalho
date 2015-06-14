@@ -33,6 +33,7 @@ public class CollisionLogic {
 					obj.setVelX(0);
 					obj.setThrown(false);
 					obj.setVisible(false);
+					((Shooter) obj).setAlive(false);
 				}
 				
 				else if (hasHitRightBounds(obj)) {

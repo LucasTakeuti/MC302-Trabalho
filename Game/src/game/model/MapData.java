@@ -48,7 +48,7 @@ public class MapData {
 				map[obj.getYfloor()][obj.getXfloor()] = 'p';
 			}
 			
-			else if (obj instanceof Shooter) {
+			else if (obj instanceof Shooter && ((Shooter) obj).isAlive()) {
 					map[obj.getYfloor()][obj.getXfloor()] = (char)(((Shooter) obj).getID() + '0');
 			}
 		}

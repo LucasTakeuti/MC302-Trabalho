@@ -8,6 +8,7 @@ public class Shooter extends Physicable {
 	private final int ID;
 	private double life;
 	private boolean invulnerable;
+	private boolean doubleJump;
 	
 	//Constructor
 	public Shooter(int x, int y) {
@@ -15,6 +16,7 @@ public class Shooter extends Physicable {
 		setLife(MAX_LIFE);
 		ID = nextID();
 		setThrown(true);
+		setDoubleJump(false);
 		setInvulnerable(false);
 	}
 	
@@ -25,7 +27,8 @@ public class Shooter extends Physicable {
 	}
 	
 	public void jump() {
-		if (!isThrown()) {
+		if (!isThrown() || hasDoubleJump()) {
+			setDoubleJump(!hasDoubleJump());
 			setThrown(true);
 			setVelY(Physics.jumpSpeed);
 		}
@@ -60,6 +63,22 @@ public class Shooter extends Physicable {
 			if (MapData.getInstance().getPhysicsList().get(i) instanceof Shooter)
 				id++;
 		return id;
+	}
+
+	public boolean isAlive() {
+		return (getLife() > 0);
+	}
+
+	public void setAlive(boolean b) {
+		setLife(b ? getLife() : 0);
+	}
+
+	private boolean hasDoubleJump() {
+		return doubleJump;
+	}
+
+	private void setDoubleJump(boolean doubleJump) {
+		this.doubleJump = doubleJump;
 	}
 	
 }

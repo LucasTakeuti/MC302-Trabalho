@@ -25,6 +25,7 @@ public class GameView {
 	private JTextField angleField;
 	private JButton shootButton;
 	private JButton jumpButton;
+	private JTextArea lifes;
 	
 	public GameView(MapData data){
 		this.data = data;
@@ -55,11 +56,15 @@ public class GameView {
 		shootButton = new JButton("Shoot!");
 		jumpButton = new JButton("Jump!");
 		
+		lifes = new JTextArea();
+		
 		panel.add(screenAscii);
 		panel.add(powerField);
 		panel.add(angleField);
 		panel.add(shootButton);
 		panel.add(jumpButton);
+		
+		panel.add(lifes);
 		
 		frame.add(panel);
 		
@@ -105,7 +110,8 @@ public class GameView {
 		
 		screenAscii.setText(ss);
 		
-		screenAscii.repaint();
+		//tests
+		lifes.setText("1: " + Double.toString(Math.round(data.getShooter(1).getLife())) + " 2: " + Double.toString(Math.round(data.getShooter(2).getLife())));
 		
 	}
 	
