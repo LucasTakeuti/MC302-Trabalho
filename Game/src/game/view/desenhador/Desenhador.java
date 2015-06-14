@@ -41,18 +41,20 @@ public class Desenhador extends JPanel{
 		add(screenAscii);
 	}
 	
-	public Desenhador(ArrayList<Cor> cores, int h, int l) {
+	public Desenhador(MapData mapa, ArrayList<Cor> cores, int hTela, int lTela) {
 		for (int i = 0; i < cores.size(); i++) {
 			this.cores.add(cores.get(i));
 		}
-		this.h = h;
-		this.l = l;
+		this.h = mapa.getMapHeight();
+		this.l = mapa.getMapWidth();
+		
+		
 	}
 	
 	public void desenhar(){
 		StringBuilder s = new StringBuilder();
 		
-		for (int i = 0; i < mapa.getMapHeight(); i++) {
+		for (int i = 0; i < h; i++) {
 			s.append(new String(mapa.getMap()[i]));
 			s.append(System.getProperty("line.separator"));
 		}

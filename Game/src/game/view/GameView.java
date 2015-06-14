@@ -18,39 +18,36 @@ import javax.swing.JTextField;
 
 public class GameView {
 	
-	private MapData data;
-	
 	private GameFrame frame;
 	
-	private Desenhador panel;
-	private Controle panel2;
+	private Desenhador desenhador;
+	private Controle controle;
 	
 	public GameView(MapData data){
-		this.data = data;
 		
 		this.frame = new GameFrame(500, 350);
 		frame.setVisible(true);
 		frame.setLayout(new BorderLayout());
 		
-		panel = new Desenhador(data);
-		panel2 = new Controle();
+		desenhador = new Desenhador(data);
+		controle = new Controle();
 		
-		frame.add(panel, BorderLayout.WEST);
-		frame.add(panel2, BorderLayout.EAST);
+		frame.add(desenhador, BorderLayout.WEST);
+		frame.add(controle, BorderLayout.EAST);
 		
-		panel2.bttnFocus();
+		controle.bttnFocus();
 	}
 	
 	public double getPower() {
-		return panel2.getPower();
+		return controle.getPower();
 	}
 	
 	public double getAngle() {
-		return panel2.getAngle();
+		return controle.getAngle();
 	}
 	
 	public void addShootListener(ActionListener shoot) {
-		panel2.addListener(shoot);
+		controle.addListener(shoot);
 	}
 	
 	public void displayErrorMessage(String errorMessage) {
@@ -58,7 +55,7 @@ public class GameView {
 	}
 	
 	public void render() {
-		panel.desenhar();
+		desenhador.desenhar();
 	}
 	
 }
