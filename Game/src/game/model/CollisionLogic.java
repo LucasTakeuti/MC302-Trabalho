@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class CollisionLogic {
 	
 	private char[][] terrain;
+	private DamageHandler damage;
 	
 	public CollisionLogic(char[][] terrain) {
 		this.terrain = terrain;
@@ -18,7 +19,8 @@ public class CollisionLogic {
 			if (obj instanceof Projectile) {
 				if (hasHitSolid(obj)) {
 					destroyTerrain(obj, ((Projectile) obj).getExplosionRadius());
-					doDamage(obj, ((Projectile) obj).getExplosionRadius());
+					damage = new DamageHandler(obj, ((Projectile) obj).getExplosionRadius());
+					damage.doDamage();
 					MapData.getInstance().deleteFromObservedList(obj);
 				}
 				if (hasHitFloorBounds(obj))
@@ -98,27 +100,8 @@ public class CollisionLogic {
 	private void destroyTerrain(Physicable obj, int explosionRadius) {
 		for (int i = Math.max(0, obj.getYfloor() - explosionRadius); i < Math.min(MapData.getInstance().getMapHeight(), obj.getYfloor() + explosionRadius); i++)
 			for (int j = Math.max(0, obj.getXfloor() - explosionRadius); j < Math.min(MapData.getInstance().getMapWidth(), obj.getXfloor() + explosionRadius); j++)
-				if (distanceofAToB(i, j, obj.getYfloor(), obj.getXfloor()) <= explosionRadius)
+				if (Physics.distanceofAToB(i, j, obj.getYfloor(), obj.getXfloor()) <= explosionRadius)
 					terrain[i][j] = Physics.fluids.get(Physics.DEFAULT_FLUID);
-	}
-	
-	private void doDamage(Physicable obj, int explosionRadius) {
-		for (int i = Math.max(0, obj.getYfloor() - explosionRadius); i < Math.min(MapData.getInstance().getMapHeight(), obj.getYfloor() + explosionRadius); i++)
-			for (int j = Math.max(0, obj.getXfloor() - explosionRadius); j < Math.min(MapData.getInstance().getMapWidth(), obj.getXfloor() + explosionRadius); j++)
-				if (distanceofAToB(i, j, obj.getYfloor(), obj.getXfloor()) <= explosionRadius)
-					if (MapData.getInstance().isShooter(i, j)) {
-						Shooter s = MapData.getInstance().getShooter(MapData.getInstance().getShooterID(i, j));
-						s.setLife(s.getLife() - damageAmount(distanceofAToB(j, i, obj.getXfloor(), obj.getYfloor()), explosionRadius));
-						s.setVisible(false);
-					}
-	}
-	
-	private double damageAmount(double distance, int explosionRadius) {
-		return Shooter.MAX_LIFE * (1 - (distance/explosionRadius));
-	}
-	
-	private double distanceofAToB(int xa, int ya, int xb, int yb) {
-		return (Math.sqrt((xa-xb)*(xa-xb) + (ya-yb)*(ya-yb))); 
 	}
 
 }

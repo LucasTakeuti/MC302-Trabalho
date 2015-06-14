@@ -28,4 +28,8 @@ public class Physics {
 		return vector * Math.sin(Math.toRadians(angle));
 	}
 	
+	public static double distanceofAToB(int xa, int ya, int xb, int yb) {
+		return (Math.sqrt((xa-xb)*(xa-xb) + (ya-yb)*(ya-yb))); 
+	}
+	
 }
