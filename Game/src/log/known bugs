@@ -1,0 +1,11 @@
+Bug Tracker:
+
+- Shooter não para ao andar contra terreno na horizontal e quando bate embaixo de terreno é colocado acima dele
+	motivo: colisão com terreno é tratada colocando o shooter uma casa acima da atual
+	resolução: ??? (sugestões?)
+-mauk
+
+- Primeiro turno é alterado no início do jogo sem o primeiro jogador jogar
+	motivo: todos jogadores sao criados com status "inativos"
+	resolução: ???
+-mauk

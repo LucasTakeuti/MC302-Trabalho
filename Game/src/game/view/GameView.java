@@ -5,16 +5,10 @@ import game.view.controles.Controle;
 import game.view.desenhador.Desenhador;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.event.ActionListener;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 public class GameView {
 	
@@ -23,19 +17,23 @@ public class GameView {
 	private Desenhador desenhador;
 	private Controle controle;
 	
+	public int amoutOfShooters;
+	
 	public GameView(MapData data){
 		
-		this.frame = new GameFrame(500, 350);
+		this.frame = new GameFrame(400, 380);
 		frame.setVisible(true);
 		frame.setLayout(new BorderLayout());
 		
 		desenhador = new Desenhador(data);
 		controle = new Controle();
 		
-		frame.add(desenhador, BorderLayout.WEST);
-		frame.add(controle, BorderLayout.EAST);
+		frame.add(desenhador, BorderLayout.NORTH);
+		frame.add(controle, BorderLayout.SOUTH);
 		
 		controle.bttnFocus();
+		
+		amoutOfShooters = Integer.valueOf(JOptionPane.showInputDialog(new JFrame(), "Amount of Shooters", "2"));
 	}
 	
 	public double getPower() {
@@ -47,7 +45,11 @@ public class GameView {
 	}
 	
 	public void addShootListener(ActionListener shoot) {
-		controle.addListener(shoot);
+		controle.addShootListener(shoot);
+	}
+
+	public void addJumpListener(ActionListener jump) {
+		controle.addJumpListener(jump);
 	}
 	
 	public void displayErrorMessage(String errorMessage) {
@@ -57,5 +59,4 @@ public class GameView {
 	public void render() {
 		desenhador.desenhar();
 	}
-	
 }

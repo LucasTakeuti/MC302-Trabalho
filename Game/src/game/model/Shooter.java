@@ -7,20 +7,33 @@ public class Shooter extends Physicable {
 	
 	private final int ID;
 	private double life;
-	private boolean thrown;
 	private boolean invulnerable;
+	private boolean doubleJump;
+	private boolean active;
 	
 	//Constructor
 	public Shooter(int x, int y) {
 		super(x, y);
 		setLife(MAX_LIFE);
 		ID = nextID();
-		setThrown(false);
+		setActive(false);
+		setDoubleJump(false);
 		setInvulnerable(false);
 	}
 	
 	public void shoot(double vx, double vy) {
-		BasicProjectile bp = new BasicProjectile(getXfloor(), getYfloor()-1, vx, vy);
+		if (isAlive() && !isMoving() && !hasFinishedTurn()) {
+			BasicProjectile bp = new BasicProjectile(getXfloor(), getYfloor()-1, vx, vy);
+			endTurn();
+		}
+	}
+	
+	public void jump() {
+		if (isAlive() && (!isMoving() || hasDoubleJump())) {
+			setDoubleJump(!hasDoubleJump());
+			setMoving(true);
+			setVelY(Physics.jumpSpeed);
+		}
 	}
 	
 	//Getters and Setters
@@ -29,20 +42,21 @@ public class Shooter extends Physicable {
 	}
 
 	public void setLife(double life) {
-		this.life = life;
+		if (!isInvulnerable())
+			this.life = life;
 	}
 
 	public int getID() {
 		return ID;
 	}
 	
-	public boolean isThrown() {
-		return thrown;
+	public boolean isInvulnerable() {
+		return invulnerable;
 	}
-
-	public void setThrown(boolean thrown) {
-		this.thrown = thrown;
-	}
+	
+	public void setInvulnerable(boolean invulnerable) {
+		this.invulnerable = invulnerable;
+	}	
 	
 	private int nextID() {
 		
@@ -54,12 +68,36 @@ public class Shooter extends Physicable {
 		return id;
 	}
 
-	public boolean isInvulnerable() {
-		return invulnerable;
+	public boolean isAlive() {
+		return (getLife() > 0);
 	}
 
-	public void setInvulnerable(boolean invulnerable) {
-		this.invulnerable = invulnerable;
+	public void setAlive(boolean b) {
+		setLife(b ? getLife() : 0);
+	}
+
+	private boolean hasDoubleJump() {
+		return doubleJump;
+	}
+
+	private void setDoubleJump(boolean doubleJump) {
+		this.doubleJump = doubleJump;
+	}
+
+	public boolean hasFinishedTurn() {
+		return !active;
+	}
+	
+	public void newTurn() {
+		setActive(true);
+	}
+	
+	public void endTurn() {
+		setActive(false);
+	}
+	
+	private void setActive(boolean active) {
+		this.active = active;
 	}
 	
 }
