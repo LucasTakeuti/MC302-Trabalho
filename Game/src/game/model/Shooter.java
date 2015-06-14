@@ -14,12 +14,14 @@ public class Shooter extends Physicable {
 		super(x, y);
 		setLife(MAX_LIFE);
 		ID = nextID();
-		setThrown(false);
+		setThrown(true);
 		setInvulnerable(false);
 	}
 	
 	public void shoot(double vx, double vy) {
-		BasicProjectile bp = new BasicProjectile(getXfloor(), getYfloor()-1, vx, vy);
+		if (!isThrown()) {
+			BasicProjectile bp = new BasicProjectile(getXfloor(), getYfloor()-1, vx, vy);
+		}
 	}
 	
 	public void jump() {

@@ -76,11 +76,11 @@ public class MapData {
 		return -1;
 	}
 	
-	public boolean isShooter(int i, int j) {
+	public boolean isShooter(int row, int column) {
 		for (int k = 0; k < PhysicsList.size(); k++) {
 			if (PhysicsList.get(k) instanceof Shooter) {
 				Shooter s = (Shooter) PhysicsList.get(k);
-				if (i == s.getYfloor() && j == s.getXfloor())
+				if (row == s.getYfloor() && column == s.getXfloor())
 					return true;
 			}
 		}

@@ -2,7 +2,7 @@ package game;
 
 import game.controller.GameController;
 import game.model.MapData;
-import game.model.Shooter;
+import game.model.ShooterSpawner;
 import game.view.GameView;
 
 public class GameMain implements Runnable {
@@ -40,7 +40,7 @@ public class GameMain implements Runnable {
 		controller = new GameController(data, view);
 		
 		//tests
-		Shooter s1 = new Shooter(3, 11);
+		ShooterSpawner s = new ShooterSpawner(2);
 		
 		running = true;
 		
