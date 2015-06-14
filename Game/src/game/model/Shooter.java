@@ -9,27 +9,29 @@ public class Shooter extends Physicable {
 	private double life;
 	private boolean invulnerable;
 	private boolean doubleJump;
+	private boolean active;
 	
 	//Constructor
 	public Shooter(int x, int y) {
 		super(x, y);
 		setLife(MAX_LIFE);
 		ID = nextID();
-		setThrown(true);
+		setActive(false);
 		setDoubleJump(false);
 		setInvulnerable(false);
 	}
 	
 	public void shoot(double vx, double vy) {
-		if (!isThrown()) {
+		if (isAlive() && !isMoving() && !hasFinishedTurn()) {
 			BasicProjectile bp = new BasicProjectile(getXfloor(), getYfloor()-1, vx, vy);
+			endTurn();
 		}
 	}
 	
 	public void jump() {
-		if (!isThrown() || hasDoubleJump()) {
+		if (isAlive() && (!isMoving() || hasDoubleJump())) {
 			setDoubleJump(!hasDoubleJump());
-			setThrown(true);
+			setMoving(true);
 			setVelY(Physics.jumpSpeed);
 		}
 	}
@@ -40,7 +42,8 @@ public class Shooter extends Physicable {
 	}
 
 	public void setLife(double life) {
-		this.life = life;
+		if (!isInvulnerable())
+			this.life = life;
 	}
 
 	public int getID() {
@@ -79,6 +82,22 @@ public class Shooter extends Physicable {
 
 	private void setDoubleJump(boolean doubleJump) {
 		this.doubleJump = doubleJump;
+	}
+
+	public boolean hasFinishedTurn() {
+		return !active;
+	}
+	
+	public void newTurn() {
+		setActive(true);
+	}
+	
+	public void endTurn() {
+		setActive(false);
+	}
+	
+	private void setActive(boolean active) {
+		this.active = active;
 	}
 	
 }

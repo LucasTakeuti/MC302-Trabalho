@@ -1,6 +1,7 @@
 package game.model;
 
 import game.ReadFile;
+import game.controller.GameController;
 
 import java.util.ArrayList;
 
@@ -54,6 +55,10 @@ public class MapData {
 		}
 	}
 	
+	public Shooter getCurrentShooter() {
+		return getShooter(GameController.getInstance().getCurrentTurn());
+	}
+	
 	public Shooter getShooter(int id) {
 		for (int i = 0; i < PhysicsList.size(); i++) {
 			if (PhysicsList.get(i) instanceof Shooter) {
@@ -65,11 +70,11 @@ public class MapData {
 		return null;
 	}
 	
-	public int getShooterID(int i, int j) {
+	public int getShooterID(int row, int column) {
 		for (int k = 0; k < PhysicsList.size(); k++) {
 			if (PhysicsList.get(k) instanceof Shooter) {
 				Shooter s = (Shooter) PhysicsList.get(k);
-				if (i == s.getYfloor() && j == s.getXfloor())
+				if (row == s.getYfloor() && column == s.getXfloor())
 					return s.getID();
 			}
 		}
@@ -83,6 +88,61 @@ public class MapData {
 				if (row == s.getYfloor() && column == s.getXfloor())
 					return true;
 			}
+		}
+		return false;
+	}
+	
+	public int nextShooterTurn() {
+		
+		for (int i = getCurrentShooter().getID(); i <= highestAliveShooterID(); i++)
+			if (!getCurrentShooter().equals(getShooter(i)) && getShooter(i).isAlive())
+				return getShooter(i).getID();
+		
+		if (getCurrentShooter().getID() == highestAliveShooterID() && amountOfAliveShooters() > 1)
+			return lowestAliveShooterID();
+		
+		return 0;
+	}
+	
+	public int amountOfAliveShooters() {
+		
+		int amount = 0;
+		
+		for (int k = 0; k < PhysicsList.size(); k++)
+			if (PhysicsList.get(k) instanceof Shooter && ((Shooter) PhysicsList.get(k)).isAlive())
+				amount++;
+		
+		return amount;
+	}
+	
+	private int lowestAliveShooterID() {
+		
+		int id = highestAliveShooterID();
+		
+		for (int k = 0; k < PhysicsList.size(); k++)
+			if (PhysicsList.get(k) instanceof Shooter && 
+				((Shooter) PhysicsList.get(k)).getID() < id && 
+				((Shooter) PhysicsList.get(k)).isAlive())
+				id = ((Shooter) PhysicsList.get(k)).getID();
+		return id;
+	}
+	
+	private int highestAliveShooterID() {
+		
+		int id = 0;
+		
+		for (int k = 0; k < PhysicsList.size(); k++)
+			if (PhysicsList.get(k) instanceof Shooter && 
+				((Shooter) PhysicsList.get(k)).getID() > id && 
+				((Shooter) PhysicsList.get(k)).isAlive())
+				id = ((Shooter) PhysicsList.get(k)).getID();
+		return id;
+	}
+	
+	public boolean hasMovingThings() {
+		for (int k = 0; k < PhysicsList.size(); k++) {
+			if (PhysicsList.get(k).isMoving())
+				return true;
 		}
 		return false;
 	}

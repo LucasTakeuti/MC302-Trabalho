@@ -32,15 +32,13 @@ public class GameMain implements Runnable {
 		t.start();
 	}
 	
-	//runnable
 	public void run() {
 		
 		data = MapData.getInstance();
 		view = new GameView(data);
-		controller = new GameController(data, view);
+		controller = GameController.getInstance(data, view);
 		
-		//tests
-		ShooterSpawner s = new ShooterSpawner(2);
+		controller.setInitialConditions();
 		
 		running = true;
 		

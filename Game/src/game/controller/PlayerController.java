@@ -22,8 +22,7 @@ public class PlayerController {
 
 		@Override
 		public void actionPerformed(ActionEvent ev) {
-			//TODO: getCurrentShooter() implementation depends on Turns System
-			MapData.getInstance().getShooter(1).jump();
+			MapData.getInstance().getCurrentShooter().jump();
 		}
 	}
 

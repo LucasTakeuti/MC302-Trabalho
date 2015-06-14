@@ -1,5 +1,6 @@
 package game.view;
 
+import game.controller.GameController;
 import game.model.MapData;
 
 import java.awt.Color;
@@ -7,6 +8,7 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -26,6 +28,10 @@ public class GameView {
 	private JButton shootButton;
 	private JButton jumpButton;
 	private JTextArea lifes;
+	private JTextArea currentTurn;
+	
+	//TODO: Modificar a maneira como amoutOfShooters eh acessada pelo GameController
+	public int amoutOfShooters;
 	
 	public GameView(MapData data){
 		this.data = data;
@@ -57,16 +63,20 @@ public class GameView {
 		jumpButton = new JButton("Jump!");
 		
 		lifes = new JTextArea();
+		currentTurn = new JTextArea();
 		
 		panel.add(screenAscii);
 		panel.add(powerField);
 		panel.add(angleField);
 		panel.add(shootButton);
 		panel.add(jumpButton);
-		
+
 		panel.add(lifes);
+		panel.add(currentTurn);
 		
 		frame.add(panel);
+		
+		amoutOfShooters = Integer.valueOf(JOptionPane.showInputDialog(new JFrame(), "Amount of Shooters", "2"));
 		
 		shootButton.requestFocus();
 		
@@ -112,6 +122,7 @@ public class GameView {
 		
 		//tests
 		lifes.setText("1: " + Double.toString(Math.round(data.getShooter(1).getLife())) + " 2: " + Double.toString(Math.round(data.getShooter(2).getLife())));
+		currentTurn.setText("Current Turn: " + Integer.toString(GameController.getInstance().getCurrentTurn()));
 		
 	}
 	

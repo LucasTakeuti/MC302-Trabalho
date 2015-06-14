@@ -11,6 +11,7 @@ public class CollisionLogic {
 		this.terrain = terrain;
 	}
 	
+	//TODO: Deletar projeteis lancados para fora do mapa de maneira irreversivel
 	public void checkCollision(ArrayList<Physicable> list) {
 		
 		for (int i = 0; i < list.size(); i++) {
@@ -31,7 +32,7 @@ public class CollisionLogic {
 				if (hasHitFloorBounds(obj)) {
 					obj.setY(obj.getYfloor()-1);
 					obj.setVelX(0);
-					obj.setThrown(false);
+					obj.setMoving(false);
 					obj.setVisible(false);
 					((Shooter) obj).setAlive(false);
 				}
@@ -51,7 +52,7 @@ public class CollisionLogic {
 				else if (hasHitSolid(obj)) {
 					obj.setY(obj.getYfloor()-1);
 					obj.setVelX(0);
-					obj.setThrown(false);
+					obj.setMoving(false);
 				}
 			}
 		}
