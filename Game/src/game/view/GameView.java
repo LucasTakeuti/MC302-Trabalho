@@ -1,11 +1,16 @@
 package game.view;
 
 import game.model.MapData;
+import game.view.controles.Controle;
+import game.view.desenhador.Desenhador;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
@@ -17,88 +22,44 @@ public class GameView {
 	
 	private GameFrame frame;
 	
-	private GamePanel panel;
-	
-	private JTextArea screenAscii;
-	private JTextField powerField;
-	private JTextField angleField;
-	private JButton shootButton;
+	private Desenhador panel;
+	private Controle panel2;
 	
 	public GameView(MapData data){
 		this.data = data;
 		
-		this.frame = new GameFrame();
+		this.frame = new GameFrame(500, 350);
 		frame.setVisible(true);
+		frame.setLayout(new BorderLayout());
 		
 		//tests - nao apague//
-		screenAscii = new JTextArea();
-		screenAscii.setColumns(data.getMapWidth());
-		screenAscii.setRows(data.getMapHeight());
-		screenAscii.setEditable(false);
+		panel = new Desenhador(data);
+		panel2 = new Controle();
 		
-		Font f = new Font("Courier", 3, 10); //monospace, negrito, tamanho 8
+		frame.add(panel, BorderLayout.WEST);
+		frame.add(panel2, BorderLayout.EAST);
 		
-		screenAscii.setFont(f);
-		screenAscii.setBackground(Color.BLACK);
-		screenAscii.setForeground(new Color(255, 255, 255, 200));
-		screenAscii.setSize(data.getMapWidth(), data.getMapHeight());
-		
-		
-		//tests - nao apague//
-		panel = new GamePanel();
-		
-		powerField = new JTextField("22", 5);
-		angleField = new JTextField("55", 5);
-		
-		shootButton = new JButton("Shoot!");
-		
-		panel.add(screenAscii);
-		panel.add(powerField);
-		panel.add(angleField);
-		panel.add(shootButton);
-		
-		frame.add(panel);
-		
-		shootButton.requestFocus();
-		
+		panel2.shootButton.requestFocus();
 	}
 	
 	public double getPower() {
-		return Double.parseDouble(powerField.getText());
+		return panel2.getPower();
 	}
 	
 	public double getAngle() {
-		return Double.parseDouble(angleField.getText());
+		return panel2.getAngle();
 	}
 	
 	public void addShootListener(ActionListener shoot) {
-		shootButton.addActionListener(shoot);
+		panel2.shootButton.addActionListener(shoot);
 	}
 	
 	public void displayErrorMessage(String errorMessage) {
 		JOptionPane.showMessageDialog(frame, errorMessage);
 	}
 	
-	public void renderAsciiConsole() {
-		for (int i = 0; i < data.getMapHeight(); i++)
-			System.out.println(data.getMap()[i]);
-	}
-	
-	public void renderAsciiFrame() {
-		
-		StringBuilder s = new StringBuilder();
-		
-		for (int i = 0; i < data.getMapHeight(); i++) {
-			s.append(new String(data.getMap()[i]));
-			s.append(System.getProperty("line.separator"));
-		}
-		
-		String ss = s.toString();
-		
-		screenAscii.setText(ss);
-		
-		screenAscii.repaint();
-		
+	public void render() {
+		panel.desenhar();
 	}
 	
 }

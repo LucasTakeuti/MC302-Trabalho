@@ -9,18 +9,12 @@ public class GameFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	GameFrame frame;
-	GamePanel panel;
 	
-	public GameFrame() {
+	public GameFrame(int h, int l) {
 		super("Worms Clone");
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setSize(new Dimension(400, 400));
-		setLocationRelativeTo(null);
 		
-		panel = new GamePanel();
-        //add(panel);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setSize(new Dimension(h, l));
+		setLocationRelativeTo(null);
 	}
-	
-	//metodo paint(Graphics g) e chamado no construtor de JFrames
-
 }
