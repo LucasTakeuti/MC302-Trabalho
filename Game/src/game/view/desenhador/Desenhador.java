@@ -16,17 +16,17 @@ public class Desenhador extends JPanel{
 	private ArrayList<Cor> cores;
 	private int h;
 	private int l;
-	//private BufferedImage quadro;
+	private BufferedImage quadro;
 	private JTextArea screenAscii;
 	private MapData mapa;
 	
 	public Desenhador(MapData data) {
 		this.mapa = data;
 		
-		this.h = mapa.getMapHeight();
-		this.l = mapa.getMapWidth();
+		this.h = mapa.getMapHeight() * 10;
+		this.l = mapa.getMapWidth() * 10;
 		
-		screenAscii = new JTextArea();
+		/*screenAscii = new JTextArea();
 		screenAscii.setColumns(l);
 		screenAscii.setRows(h);
 		screenAscii.setEditable(false);
@@ -36,9 +36,12 @@ public class Desenhador extends JPanel{
 		screenAscii.setFont(f);
 		screenAscii.setBackground(Color.BLACK);
 		screenAscii.setForeground(new Color(255, 255, 255, 200));
-		screenAscii.setSize(l, h);
+		screenAscii.setSize(l, h);*/
 		
-		add(screenAscii);
+		quadro = new BufferedImage(h, l, BufferedImage.TYPE_INT_ARGB);
+		cores = new ArrayList<Cor>();
+		
+		cores.add(new Cor("vermelho", Color.RED));
 	}
 	
 	public Desenhador(MapData mapa, ArrayList<Cor> cores, int hTela, int lTela) {
@@ -52,7 +55,22 @@ public class Desenhador extends JPanel{
 	}
 	
 	public void desenhar(){
-		StringBuilder s = new StringBuilder();
+		
+		for (int x = 0; x < l; x++) {
+			for (int y = 0; y < h; y++) {
+				int rgb = 0;
+				boolean flag = false;
+				for (int i = 0; (i < cores.size()) && (!flag); i++) {
+					if (cores.get(i).getId() == "vermelho") {
+						flag = true;
+						rgb = cores.get(i).getRgb();
+					}
+				}
+				quadro.setRGB(x, y, rgb);
+			}
+		}
+		
+		/*StringBuilder s = new StringBuilder();
 		
 		for (int i = 0; i < h; i++) {
 			s.append(new String(mapa.getMap()[i]));
@@ -63,6 +81,6 @@ public class Desenhador extends JPanel{
 		
 		screenAscii.setText(ss);
 		
-		screenAscii.repaint();
+		screenAscii.repaint();*/
 	}
 }

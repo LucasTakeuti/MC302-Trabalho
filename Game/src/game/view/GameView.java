@@ -67,7 +67,7 @@ public class GameView {
 		for (int i = 1; i <= amountOfShooters; i++) {
 			vidas.append(i);
 			vidas.append(": ");
-			vidas.append(Math.round(data.getShooter(1).getLife()));
+			vidas.append(Math.round(data.getShooter(i).getLife()));
 			vidas.append(" ");
 		}
 		
