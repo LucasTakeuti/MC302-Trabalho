@@ -1,5 +1,6 @@
 package game.view;
 
+import game.controller.GameController;
 import game.model.MapData;
 import game.view.controles.Controle;
 import game.view.desenhador.Desenhador;
@@ -13,13 +14,15 @@ import javax.swing.JOptionPane;
 public class GameView {
 	
 	private GameFrame frame;
+	private MapData data;
 	
 	private Desenhador desenhador;
 	private Controle controle;
 	
-	public int amoutOfShooters;
+	public int amountOfShooters;
 	
 	public GameView(MapData data){
+		this.data = data;
 		
 		this.frame = new GameFrame(400, 380);
 		frame.setVisible(true);
@@ -33,7 +36,7 @@ public class GameView {
 		
 		controle.bttnFocus();
 		
-		amoutOfShooters = Integer.valueOf(JOptionPane.showInputDialog(new JFrame(), "Amount of Shooters", "2"));
+		amountOfShooters = Integer.valueOf(JOptionPane.showInputDialog(new JFrame(), "Amount of Shooters", "2"));
 	}
 	
 	public double getPower() {
@@ -57,6 +60,18 @@ public class GameView {
 	}
 	
 	public void render() {
+		StringBuilder vidas = new StringBuilder();
+		
 		desenhador.desenhar();
+		
+		for (int i = 1; i <= amountOfShooters; i++) {
+			vidas.append(i);
+			vidas.append(": ");
+			vidas.append(Math.round(data.getShooter(1).getLife()));
+			vidas.append(" ");
+		}
+		
+		controle.setLifes(vidas.toString());
+		controle.setCurrentTurn("Current Turn: " + Integer.toString(GameController.getInstance().getCurrentTurn()));
 	}
 }

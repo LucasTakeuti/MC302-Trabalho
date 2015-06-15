@@ -57,11 +57,11 @@ public class Controle extends JPanel {
 		jumpButton.addActionListener(actionListener);
 	}
 	
-	public void setLifes(Integer vidas) {
-		lifes.setText(vidas.toString());
+	public void setLifes(String vidas) {
+		lifes.setText(vidas);
 	}
 	
-	public void setCurrentTurn(Integer turn) {
-		currentTurn.setText(turn.toString());
+	public void setCurrentTurn(String turn) {
+		currentTurn.setText(turn);
 	}
 }

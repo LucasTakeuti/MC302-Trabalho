@@ -41,9 +41,9 @@ public class GameController {
 		this.data = data;
 		this.view = view;
 		
-		s = new ShooterSpawner(view.amoutOfShooters);
+		s = new ShooterSpawner(view.amountOfShooters);
 		
-		setCurrentTurn(r.nextInt(view.amoutOfShooters) + 1);
+		setCurrentTurn(r.nextInt(view.amountOfShooters) + 1);
 		
 		this.setCurrentState(GameState.MAINGAME);
 		
