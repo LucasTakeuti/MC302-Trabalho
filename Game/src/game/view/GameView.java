@@ -25,6 +25,7 @@ public class GameView {
 	private JTextArea screenAscii;
 	private JTextField powerField;
 	private JTextField angleField;
+	private JTextField nameField;
 	private JButton shootButton;
 	private JButton jumpButton;
 	private JTextArea lifes;
@@ -58,6 +59,7 @@ public class GameView {
 		
 		powerField = new JTextField("22", 5);
 		angleField = new JTextField("55", 5);
+		nameField = new JTextField("-", 10);
 		
 		shootButton = new JButton("Shoot!");
 		jumpButton = new JButton("Jump!");
@@ -70,6 +72,7 @@ public class GameView {
 		panel.add(angleField);
 		panel.add(shootButton);
 		panel.add(jumpButton);
+		//panel.add(nameField);
 
 		panel.add(lifes);
 		panel.add(currentTurn);

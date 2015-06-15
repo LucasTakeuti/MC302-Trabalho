@@ -9,3 +9,6 @@ Bug Tracker:
 	motivo: todos jogadores sao criados com status "inativos"
 	resolução: ???
 -mauk
+
+- Se você aperta o botão cancelar na hora de selecionar a quantidade de jogadores ele gera um erro.
+-Spider
