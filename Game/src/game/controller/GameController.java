@@ -16,16 +16,13 @@ public class GameController {
 	
 	private static GameController gc = null;
 	
-	private int currentTurn;
-	
 	private GameState currentState;
 	
 	private ShootController shootCont;
 	private PlayerController playerCont;
+	private TurnController turnCont;
 	
 	private ShooterSpawner s;
-	
-	private Random r = new Random();
 	
 	public static GameController getInstance(MapData data, GameView view) {
 		if (gc == null)
@@ -43,12 +40,11 @@ public class GameController {
 		
 		s = new ShooterSpawner(view.amoutOfShooters);
 		
-		setCurrentTurn(r.nextInt(view.amoutOfShooters) + 1);
-		
 		this.setCurrentState(GameState.MAINGAME);
 		
 		playerCont = new PlayerController(data, view);
 		shootCont = new ShootController(data, view);
+		turnCont = TurnController.getInstance(data, view);
 	}
 
 	public void update() {
@@ -58,7 +54,7 @@ public class GameController {
 				break;
 			case MAINGAME:
 				data.updateMap();
-				nextTurn();
+				turnCont.nextTurn();
 				//if(stateChangesCondition) THEN change game state
 				break;
 			case PAUSE:
@@ -71,29 +67,10 @@ public class GameController {
 		}
 	}
 	
-	//proximo turno: acabou o tempo ou shooter ja atirou e nao ha nada se movendo no mapa
-	private void nextTurn() {
-		if (/*time's up! || */ (MapData.getInstance().getCurrentShooter().hasFinishedTurn() && !MapData.getInstance().hasMovingThings())) {
-			setCurrentTurn(MapData.getInstance().nextShooterTurn());
-			if (MapData.getInstance().amountOfAliveShooters() <= 1)
-				setCurrentState(GameState.GAMEOVER);
-			else
-				MapData.getInstance().getCurrentShooter().newTurn();
-		}
-	}
-	
 	public void setInitialConditions() {
 		MapData.getInstance().getCurrentShooter().newTurn();
 	}
 	
-	public int getCurrentTurn() {
-		return currentTurn;
-	}
-
-	public void setCurrentTurn(int currentTurn) {
-		this.currentTurn = currentTurn;
-	}
-
 	public GameState getCurrentState() {
 		return currentState;
 	}

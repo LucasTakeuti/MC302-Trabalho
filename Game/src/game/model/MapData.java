@@ -1,7 +1,7 @@
 package game.model;
 
 import game.ReadFile;
-import game.controller.GameController;
+import game.controller.TurnController;
 
 import java.util.ArrayList;
 
@@ -56,7 +56,7 @@ public class MapData {
 	}
 	
 	public Shooter getCurrentShooter() {
-		return getShooter(GameController.getInstance().getCurrentTurn());
+		return getShooter(TurnController.getInstance().getCurrentTurn());
 	}
 	
 	public Shooter getShooter(int id) {

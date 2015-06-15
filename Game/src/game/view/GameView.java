@@ -1,6 +1,6 @@
 package game.view;
 
-import game.controller.GameController;
+import game.controller.TurnController;
 import game.model.MapData;
 
 import java.awt.Color;
@@ -122,7 +122,7 @@ public class GameView {
 		
 		//tests
 		lifes.setText("1: " + Double.toString(Math.round(data.getShooter(1).getLife())) + " 2: " + Double.toString(Math.round(data.getShooter(2).getLife())));
-		currentTurn.setText("Current Turn: " + Integer.toString(GameController.getInstance().getCurrentTurn()));
+		currentTurn.setText("Current Turn: " + Integer.toString(TurnController.getInstance().getCurrentTurn()));
 		
 	}
 	

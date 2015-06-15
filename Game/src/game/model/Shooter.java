@@ -29,7 +29,7 @@ public class Shooter extends Physicable {
 	}
 	
 	public void jump() {
-		if (isAlive() && (!isMoving() || hasDoubleJump())) {
+		if (isAlive() && (!isMoving() || hasDoubleJump()) && !hasFinishedTurn()) {
 			setDoubleJump(!hasDoubleJump());
 			setMoving(true);
 			setVelY(Physics.jumpSpeed);
