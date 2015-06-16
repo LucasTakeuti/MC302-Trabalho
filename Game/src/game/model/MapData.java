@@ -1,6 +1,8 @@
 package game.model;
 
 import game.ReadFile;
+import game.controller.GameController;
+import game.controller.GameState;
 import game.controller.TurnController;
 
 import java.util.ArrayList;
@@ -21,6 +23,13 @@ public class MapData {
 		if (m == null)
 			m = new MapData();
 		return m;
+	}
+	
+	public void resetData() {
+		while (PhysicsList.size() > 0)
+			PhysicsList.remove(PhysicsList.size()-1);
+		terrain = reader.readFile();
+		collider = new CollisionLogic(terrain);
 	}
 	
 	private MapData() {
@@ -57,7 +66,9 @@ public class MapData {
 	}
 	
 	public Shooter getCurrentShooter() {
-		return getShooter(TurnController.getInstance().getCurrentTurn());
+		if (getShooter(TurnController.getInstance().getCurrentTurn()) != null)
+			return getShooter(TurnController.getInstance().getCurrentTurn());
+		return new Shooter(0, 0);
 	}
 	
 	public Shooter getShooter(int id) {
@@ -68,7 +79,7 @@ public class MapData {
 					return s;
 			}
 		}
-		return null;
+		return new Shooter(0, 0);
 	}
 	
 	public int getShooterID(int row, int column) {
@@ -95,7 +106,7 @@ public class MapData {
 	
 	public boolean hasMovingThings() {
 		for (int k = 0; k < PhysicsList.size(); k++) {
-			if (PhysicsList.get(k).isMoving())
+			if (PhysicsList.get(k).isFalling())
 				return true;
 		}
 		return false;

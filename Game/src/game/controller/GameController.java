@@ -21,6 +21,7 @@ public class GameController {
 	private ShootController shootCont;
 	private PlayerController playerCont;
 	private TurnController turnCont;
+	private ResetController resetCont;
 	
 	private ShooterSpawner s;
 	
@@ -34,6 +35,10 @@ public class GameController {
 		return gc;
 	}
 	
+	public void resetController(MapData data, GameView view) {
+		gc = new GameController(data, view);
+	}
+	
 	private GameController(MapData data, GameView view) {
 		this.data = data;
 		this.view = view;
@@ -44,6 +49,7 @@ public class GameController {
 		
 		playerCont = new PlayerController(data, view);
 		shootCont = new ShootController(data, view);
+		resetCont = new ResetController(data, view);
 		turnCont = TurnController.getInstance(data, view);
 	}
 
@@ -60,6 +66,9 @@ public class GameController {
 				//if(stateChangesCondition) THEN change game state
 				break;
 			case PAUSE:
+				//if(stateChangesCondition) THEN change game state
+				break;
+			case RESET:
 				//if(stateChangesCondition) THEN change game state
 				break;
 			case GAMEOVER:

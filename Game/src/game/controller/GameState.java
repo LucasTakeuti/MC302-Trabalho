@@ -5,6 +5,7 @@ public enum GameState {
 	TITLE,
 	MAINGAME,
 	PAUSE,
+	RESET,
 	GAMEOVER;
 
 }

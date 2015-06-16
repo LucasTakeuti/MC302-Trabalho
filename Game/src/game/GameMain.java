@@ -34,18 +34,18 @@ public class GameMain implements Runnable {
 	
 	public void run() {
 		
-		data = MapData.getInstance();
-		view = new GameView(data);
-		controller = GameController.getInstance(data, view);
+		MapData.getInstance();
+		view = new GameView(MapData.getInstance());
+		GameController.getInstance(MapData.getInstance(), view);
 		
-		controller.setInitialConditions();
+		GameController.getInstance().setInitialConditions();
 		
 		running = true;
 		
 		//game loop
 		while (running) {
 			
-			controller.update();
+			GameController.getInstance().update();
 			view.renderAsciiFrame();
 			
 			sleepTime = nextFrame - System.currentTimeMillis();

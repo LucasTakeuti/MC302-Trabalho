@@ -33,7 +33,7 @@ public class CollisionLogic {
 			if (obj instanceof Shooter) {
 				if (hasHitFloorBounds(obj)) {
 					((Shooter) obj).setAlive(false);
-					obj.setMoving(false);
+					obj.setFalling(false);
 					obj.setVisible(false);
 					obj.setY(obj.getYfloor()-1);
 					obj.setVelX(0);
@@ -52,9 +52,12 @@ public class CollisionLogic {
 				}
 				
 				else if (hasHitSolid(obj)) {
-					obj.setMoving(false);
+					obj.setFalling(false);
 					if (hasHitTerrain(obj))
 						obj.setY(obj.getYfloor()-1);
+					if (obj.getVelX() != 0 && ((!hasHitLeftBounds(obj) && Physics.solids.contains(MapData.getInstance().getMap()[obj.getYfloor()][obj.getXfloor()-1])) || 
+						(!hasHitRightBounds(obj) && Physics.solids.contains(MapData.getInstance().getMap()[obj.getYfloor()][obj.getXfloor()+1]))))
+						obj.setVelX(0);
 				}				
 			}
 		}

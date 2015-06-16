@@ -22,16 +22,16 @@ public class Shooter extends Physicable {
 	}
 	
 	public void shoot(double vx, double vy) {
-		if (isAlive() && !isMoving() && !hasFinishedTurn()) {
+		if (isAlive() && !isFalling() && !hasFinishedTurn()) {
 			BasicProjectile bp = new BasicProjectile(getXfloor(), getYfloor()-1, vx, vy);
 			endTurn();
 		}
 	}
 	
 	public void jump() {
-		if (isAlive() && (!isMoving() || hasDoubleJump()) && !hasFinishedTurn()) {
+		if (isAlive() && (!isFalling() || hasDoubleJump()) && !hasFinishedTurn()) {
 			setDoubleJump(!hasDoubleJump());
-			setMoving(true);
+			setFalling(true);
 			setVelY(Physics.jumpSpeed);
 		}
 	}

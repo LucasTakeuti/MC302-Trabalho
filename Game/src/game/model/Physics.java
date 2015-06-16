@@ -14,7 +14,7 @@ public class Physics {
 	
 	public static final int DEFAULT_FLUID = 0;
 	
-	public static final int jumpSpeed = -7;
+	public static final int jumpSpeed = -8;
 	
 	public static final double MAX_PROJECTILE_DISTANCE = MapData.getInstance().getMapHeight() + MapData.getInstance().getMapWidth();
 	

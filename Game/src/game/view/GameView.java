@@ -1,5 +1,6 @@
 package game.view;
 
+import game.controller.GameController;
 import game.controller.TurnController;
 import game.model.MapData;
 
@@ -27,6 +28,7 @@ public class GameView {
 	private JTextField angleField;
 	private JButton shootButton;
 	private JButton jumpButton;
+	private JButton resetButton;
 	private JTextArea lifes;
 	private JTextArea currentTurn;
 	
@@ -61,6 +63,7 @@ public class GameView {
 		
 		shootButton = new JButton("Shoot!");
 		jumpButton = new JButton("Jump!");
+		resetButton = new JButton("Reset");
 		
 		lifes = new JTextArea();
 		currentTurn = new JTextArea();
@@ -70,7 +73,8 @@ public class GameView {
 		panel.add(angleField);
 		panel.add(shootButton);
 		panel.add(jumpButton);
-
+		panel.add(resetButton);
+		
 		panel.add(lifes);
 		panel.add(currentTurn);
 		
@@ -80,6 +84,10 @@ public class GameView {
 		
 		shootButton.requestFocus();
 		
+	}
+	
+	public void resetView() {
+		this.data = MapData.getInstance();
 	}
 	
 	public double getPower() {
@@ -96,6 +104,10 @@ public class GameView {
 	
 	public void addJumpListener(ActionListener jump) {
 		jumpButton.addActionListener(jump);
+	}
+	
+	public void addResetListener(ActionListener reset) {
+		resetButton.addActionListener(reset);
 	}
 	
 	public void displayErrorMessage(String errorMessage) {
