@@ -32,7 +32,7 @@ public class TurnController {
 		this.data = data;
 		this.view = view;
 		
-		setCurrentTurn(r.nextInt(view.amoutOfShooters) + 1);
+		setCurrentTurn(r.nextInt(view.amountOfShooters) + 1);
 	}
 	
 	//TODO: implementar timer
@@ -40,7 +40,7 @@ public class TurnController {
 		// shooter ja atirou E nao ha nada se movendo no mapa
 		if (MapData.getInstance().getCurrentShooter().hasFinishedTurn() && !MapData.getInstance().hasMovingThings()) {
 			do {
-				setCurrentTurn((getCurrentTurn() % view.amoutOfShooters) + 1);
+				setCurrentTurn((getCurrentTurn() % view.amountOfShooters) + 1);
 			} while (!MapData.getInstance().getCurrentShooter().isAlive() && MapData.getInstance().amountOfAliveShooters() > 1);
 			MapData.getInstance().getCurrentShooter().newTurn();
 		}

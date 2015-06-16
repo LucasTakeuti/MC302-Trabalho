@@ -41,7 +41,7 @@ public class GameController {
 		this.data = data;
 		this.view = view;
 		
-		s = new ShooterSpawner(view.amoutOfShooters);
+		s = new ShooterSpawner(view.amountOfShooters);
 		
 		this.setCurrentState(GameState.MAINGAME);
 		

@@ -16,7 +16,6 @@ public class PlayerController {
 	public PlayerController(MapData data, GameView view) {
 		this.data = data;
 		this.view = view;
-		this.view.addJumpListener(new JumpListener());
 		this.view.addkeyboard(input);
 		
 	}
