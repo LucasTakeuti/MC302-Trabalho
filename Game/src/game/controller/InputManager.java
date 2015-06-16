@@ -3,6 +3,8 @@ package game.controller;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import fagocity.controller.GameController;
+
 public class InputManager implements KeyListener {
 	
 	public static boolean leftPressed = false;
