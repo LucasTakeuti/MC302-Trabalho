@@ -1,7 +1,7 @@
 package game.model;
 
 public class BasicProjectile extends Projectile {
-	
+
 	//(coluna, linha)
 	public BasicProjectile(int x, int y, double vx, double vy) {
 		

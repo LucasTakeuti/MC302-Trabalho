@@ -1,9 +1,10 @@
 package game.model;
 
 import game.ReadFile;
-import game.controller.GameController;
-import game.controller.GameState;
+import game.SaveGame;
 import game.controller.TurnController;
+import game.interfaces.IPhysicable;
+import game.interfaces.IProjectile;
 
 import java.util.ArrayList;
 
@@ -52,10 +53,10 @@ public class MapData {
 			putIntoMap(PhysicsList.get(i));
 	}
 	
-	private void putIntoMap(Physicable obj) {
+	private void putIntoMap(IPhysicable obj) {
 		
 		if (obj.isVisible() && !(collider.hasHitBounds(obj))) {
-			if (obj instanceof Projectile) {
+			if (obj instanceof IProjectile) {
 				map[obj.getYfloor()][obj.getXfloor()] = 'p';
 			}
 			
@@ -127,7 +128,7 @@ public class MapData {
 		PhysicsList.add(p);
 	}
 	
-	public void deleteFromObservedList(Physicable p) {
+	public void deleteFromObservedList(IPhysicable p) {
 		PhysicsList.remove(p);
 	}
 	

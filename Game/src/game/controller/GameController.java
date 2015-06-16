@@ -4,8 +4,6 @@ import game.model.MapData;
 import game.model.ShooterSpawner;
 import game.view.GameView;
 
-import java.util.Random;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -70,7 +68,12 @@ public class GameController {
 				break;
 			case GAMEOVER:
 				data.updateMap();
-				int option = JOptionPane.showConfirmDialog(new JFrame(), "Play Again?", "Vitória do Player " + MapData.getInstance().getCurrentShooter().getID(), 0);
+				String message;
+				if (MapData.getInstance().amountOfAliveShooters() == 0)
+					message = "Empate!"; 
+				else
+					message = "Vitória do Player " + MapData.getInstance().getCurrentShooter().getID();
+				int option = JOptionPane.showConfirmDialog(new JFrame(), "Play Again?", message, 0);
 				if (option == JOptionPane.OK_OPTION)
 					resetCont.resetGame();
 				else

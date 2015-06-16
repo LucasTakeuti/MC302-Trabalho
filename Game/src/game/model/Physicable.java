@@ -1,8 +1,9 @@
 package game.model;
 
 import game.GameMain;
+import game.interfaces.IPhysicable;
 
-public abstract class Physicable {
+public abstract class Physicable implements IPhysicable {
 	
 	//Campos
 	private double x;
@@ -45,6 +46,7 @@ public abstract class Physicable {
 		setVelX(Physics.step(getVelX(), getAccelX(), GameMain.FrameDurationInSecs));
 		setVelY(Physics.step(getVelY(), getAccelY(), GameMain.FrameDurationInSecs));
 		
+		//setFalling(true);
 	}
 	
 	//Getters and Setters

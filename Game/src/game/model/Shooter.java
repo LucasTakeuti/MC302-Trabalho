@@ -1,5 +1,7 @@
 package game.model;
 
+import java.util.ArrayList;
+
 public class Shooter extends Physicable {
 	
 	//Campos
@@ -10,10 +12,12 @@ public class Shooter extends Physicable {
 	private boolean invulnerable;
 	private boolean doubleJump;
 	private boolean active;
+	private ArrayList<Physicable> shoots;
 	
 	//Constructor
 	public Shooter(int x, int y) {
 		super(x, y);
+		setShoots(new ArrayList<Physicable>());
 		setLife(MAX_LIFE);
 		ID = nextID();
 		setActive(false);
@@ -21,9 +25,12 @@ public class Shooter extends Physicable {
 		setInvulnerable(false);
 	}
 	
-	public void shoot(double vx, double vy) {
+	public void basicShoot(double vx, double vy) {
+		
+		ProjectileFactory projectileFactory = new ProjectileFactory(this);
+		
 		if (isAlive() && !isFalling() && !hasFinishedTurn()) {
-			BasicProjectile bp = new BasicProjectile(getXfloor(), getYfloor()-1, vx, vy);
+			getShoots().add(projectileFactory.createProjectile("Basic Projectile", vx, vy));
 			endTurn();
 		}
 	}
@@ -103,6 +110,14 @@ public class Shooter extends Physicable {
 	
 	private void setActive(boolean active) {
 		this.active = active;
+	}
+
+	public ArrayList<Physicable> getShoots() {
+		return shoots;
+	}
+
+	public void setShoots(ArrayList<Physicable> shoots) {
+		this.shoots = shoots;
 	}
 	
 }

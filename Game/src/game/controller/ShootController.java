@@ -32,7 +32,7 @@ public class ShootController {
 				angle = view.getAngle()-90;
 				
 				if (power >= 0 && power <= 100)
-					data.getCurrentShooter().shoot(Physics.getXComponent(power, angle), Physics.getYComponent(power, angle));
+					data.getCurrentShooter().basicShoot(Physics.getXComponent(power, angle), Physics.getYComponent(power, angle));
 				else
 					view.displayErrorMessage("Power [0 ~ 100]");				
 			}

@@ -1,7 +1,9 @@
 package game.model;
 
+import game.interfaces.IPhysicable;
+import game.interfaces.IProjectile;
 
-public abstract class Projectile extends Physicable {
+public abstract class Projectile extends Physicable implements IPhysicable, IProjectile {
 	
 	//Campos
 	private int explosionRadius;

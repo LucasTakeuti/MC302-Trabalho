@@ -1,11 +1,13 @@
 package game.model;
 
+import game.interfaces.IPhysicable;
+
 public class DamageHandler {
 	
-	Physicable explodable;
+	IPhysicable explodable;
 	int explosionRadius;
 	
-	public DamageHandler(Physicable obj, int explosionRadius) {
+	public DamageHandler(IPhysicable obj, int explosionRadius) {
 		this.explodable = obj;
 		this.explosionRadius = explosionRadius;
 	}
