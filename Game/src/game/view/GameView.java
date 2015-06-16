@@ -1,12 +1,13 @@
 package game.view;
 
-import game.controller.GameController;
+import game.controller.InputManager;
 import game.controller.TurnController;
 import game.model.MapData;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -117,6 +118,13 @@ public class GameView {
 	
 	public void displayErrorMessage(String errorMessage) {
 		JOptionPane.showMessageDialog(frame, errorMessage);
+	}
+	
+	public void addkeyboard(InputManager input){
+		KeyListener listener = input;
+		screenAscii.addKeyListener(listener);
+		screenAscii.setFocusable(true);
+		screenAscii.requestFocus();
 	}
 	
 	public void renderAsciiConsole() {

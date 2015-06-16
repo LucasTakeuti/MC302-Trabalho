@@ -1,77 +1,59 @@
 package game.controller;
 
+import game.model.MapData;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class InputManager implements KeyListener {
 	
-	public static boolean leftPressed = false;
-	public static boolean rightPressed = false;
-	public static boolean upPressed = false;
-	public static boolean downPressed = false;
-	public static boolean spacePressed = false;
-	
-	private static InputManager inputmanager = null;
+
 
 	@Override
 	public void keyPressed(KeyEvent e) {
             // Edited this part due to pbl.
             int key = e.getKeyCode();
+        if (GameController.getInstance().getCurrentState() == GameState.MAINGAME){
 		if (key == KeyEvent.VK_LEFT)
-			leftPressed = true;
+			MapData.getInstance().getCurrentShooter().setVelX(-4);
 		if (key == KeyEvent.VK_RIGHT)
-			rightPressed = true;
-		if (key == KeyEvent.VK_UP)
-			upPressed = true;
-		if (key == KeyEvent.VK_DOWN)
-			downPressed = true;
-		if (key == KeyEvent.VK_SPACE)
-			spacePressed = true;
-		if (key == KeyEvent.VK_ESCAPE);
+			MapData.getInstance().getCurrentShooter().setVelX(4);
+		if (key == KeyEvent.VK_UP);
+			
+		if (key == KeyEvent.VK_DOWN);
 		
+		if (key == KeyEvent.VK_SPACE)
+			MapData.getInstance().getCurrentShooter().jump();
+		if (key == KeyEvent.VK_ESCAPE);
+        }
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
             // Edited this part due to pbl.
             int key = e.getKeyCode();
+        if (GameController.getInstance().getCurrentState() == GameState.MAINGAME){  
 		if (key == KeyEvent.VK_LEFT)
-			leftPressed = false;
+			MapData.getInstance().getCurrentShooter().setVelX(0);
 		if (key == KeyEvent.VK_RIGHT)
-			rightPressed = false;
-		if (key == KeyEvent.VK_UP)
-			upPressed = false;
-		if (key == KeyEvent.VK_DOWN)
-			downPressed = false;
-		if (key == KeyEvent.VK_SPACE)
-			spacePressed = false;
+			MapData.getInstance().getCurrentShooter().setVelX(0);
+		if (key == KeyEvent.VK_UP);
+			
+		if (key == KeyEvent.VK_DOWN);
+			
+		if (key == KeyEvent.VK_SPACE);
+		System.out.println("keyPressed="+KeyEvent.getKeyText(e.getKeyCode()));
+        }
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {}
 	
-	public void handleInput() {
-			
-		if (InputManager.rightPressed)
 	
-			if (InputManager.leftPressed)
-
-		
-	if (InputManager.upPressed)
-		
-		if (InputManager.downPressed)
-				
-	if (InputManager.spacePressed) {
-		// Jump...or shoot...or...something.
-	}
 			
-	   }
+	  
 
-	public static InputManager getInstance() {
-		if (inputmanager == null)
-			inputmanager = new InputManager();
-		return inputmanager;
-	}
+	
 }
 
 
