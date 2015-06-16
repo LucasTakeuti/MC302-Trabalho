@@ -68,14 +68,13 @@ public class GameController {
 			case PAUSE:
 				//if(stateChangesCondition) THEN change game state
 				break;
-			case RESET:
-				//if(stateChangesCondition) THEN change game state
-				break;
 			case GAMEOVER:
 				data.updateMap();
-				System.out.println("gg wp ;)");
-				//System.exit(0);
-				//if(stateChangesCondition) THEN change game state
+				int option = JOptionPane.showConfirmDialog(new JFrame(), "Play Again?", "Vitória do Player " + MapData.getInstance().getCurrentShooter().getID(), 0);
+				if (option == JOptionPane.OK_OPTION)
+					resetCont.resetGame();
+				else
+					System.exit(0);
 				break;
 		}
 	}

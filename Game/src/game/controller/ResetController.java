@@ -19,6 +19,12 @@ public class ResetController {
 		this.view.addResetListener(new ResetListener());
 	}
 	
+	public void resetGame() {
+		MapData.getInstance().resetData();
+		GameController.getInstance().resetController(MapData.getInstance(), view);
+		view.resetView();
+	}
+	
 	class ResetListener implements ActionListener {
 
 		@Override

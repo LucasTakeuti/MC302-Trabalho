@@ -80,7 +80,12 @@ public class GameView {
 		
 		frame.add(panel);
 		
-		amoutOfShooters = Integer.valueOf(JOptionPane.showInputDialog(new JFrame(), "Amount of Shooters:", "2"));
+		String option = JOptionPane.showInputDialog(new JFrame(), "Amount of Shooters:", "2");
+		
+		if (option == null)
+			System.exit(0);
+		
+		amoutOfShooters = Integer.valueOf(option);
 		
 		shootButton.requestFocus();
 		

@@ -8,7 +8,7 @@ public class Physics {
 	public static final int gravityX = 0;
 	public static final int gravityY = 10;
 	
-	public static final List<Character> solids = Arrays.asList('g', '1', '2');
+	public static final List<Character> solids = Arrays.asList('g', '1', '2', '3', '4', '5', '6', '7', '8', '9');
 	
 	public static final List<Character> fluids = Arrays.asList('~');
 	
