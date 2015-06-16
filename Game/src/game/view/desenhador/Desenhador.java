@@ -4,19 +4,23 @@ import game.model.MapData;
 
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-public class Desenhador extends JPanel{
+public class Desenhador extends Canvas{
 	private ArrayList<Cor> cores;
 	private int h;
 	private int l;
-	private BufferedImage quadro;
+	private int hPixel;
+	private int lPixel;
 	private JTextArea screenAscii;
 	private MapData mapa;
 	
@@ -25,6 +29,9 @@ public class Desenhador extends JPanel{
 		
 		this.h = mapa.getMapHeight() * 10;
 		this.l = mapa.getMapWidth() * 10;
+		
+		Dimension size = new Dimension(l, h);
+		setPreferredSize(size);
 		
 		/*screenAscii = new JTextArea();
 		screenAscii.setColumns(l);
@@ -38,37 +45,50 @@ public class Desenhador extends JPanel{
 		screenAscii.setForeground(new Color(255, 255, 255, 200));
 		screenAscii.setSize(l, h);*/
 		
-		quadro = new BufferedImage(h, l, BufferedImage.TYPE_INT_ARGB);
 		cores = new ArrayList<Cor>();
-		
 		cores.add(new Cor("vermelho", Color.RED));
 	}
 	
 	public Desenhador(MapData mapa, ArrayList<Cor> cores, int hTela, int lTela) {
-		for (int i = 0; i < cores.size(); i++) {
-			this.cores.add(cores.get(i));
-		}
-		this.h = mapa.getMapHeight();
-		this.l = mapa.getMapWidth();
+		this.cores = cores;
+		this.mapa = mapa;
+		this.h = hTela;
+		this.l = lTela;
 		
+		Dimension size = new Dimension(l, h);
+		setPreferredSize(size);
 		
+		this.hPixel = (int)(hTela / mapa.getMapHeight());
+		this.lPixel = (int)(lTela / mapa.getMapWidth());
 	}
 	
-	public void desenhar(){
+	public void desenhar() {
+		boolean flag = false;
+		Color cor = Color.black;
 		
-		for (int x = 0; x < l; x++) {
-			for (int y = 0; y < h; y++) {
-				int rgb = 0;
-				boolean flag = false;
-				for (int i = 0; (i < cores.size()) && (!flag); i++) {
-					if (cores.get(i).getId() == "vermelho") {
+		BufferStrategy bs = getBufferStrategy();
+		if (bs == null) {
+			createBufferStrategy(3);
+			return;
+		}
+		
+		Graphics g = bs.getDrawGraphics();
+		for (int x = 0; x < mapa.getMapWidth(); x++) {
+			for (int y = 0; y < mapa.getMapHeight(); y++) {
+				cor = Color.black;
+				flag = false;
+				for (int i = 0; i < cores.size() && (!flag); i++) {
+					if (cores.get(i).getId().equals(Character.toString(mapa.getMap()[y][x]))){
+						cor = cores.get(i).getCor();
 						flag = true;
-						rgb = cores.get(i).getRgb();
 					}
 				}
-				quadro.setRGB(x, y, rgb);
+				g.setColor(cor);
+				g.fillRect((x * lPixel), (y * hPixel), lPixel, hPixel);
 			}
 		}
+		g.dispose();
+		bs.show();
 		
 		/*StringBuilder s = new StringBuilder();
 		

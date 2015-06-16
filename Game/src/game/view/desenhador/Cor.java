@@ -5,18 +5,18 @@ import java.awt.Color;
 public class Cor {
 	
 	private String id;
-	private int rgb;
+	private Color cor;
 	
-	public Cor(String id, Color rgb) {
+	public Cor(String id, Color cor) {
 		this.id = id;
-		this.rgb = rgb.getRGB();
+		this.cor = cor;
 	}
 	
 	public String getId() {
 		return id;
 	}
 	
-	public int getRgb() {
-		return rgb;
+	public Color getCor() {
+		return cor;
 	}
 }
