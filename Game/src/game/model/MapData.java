@@ -13,6 +13,7 @@ public class MapData {
 	private int[] mapDim = reader.fileLength();
 	private char[][] map = new char[mapDim[0]][mapDim[1]];
 	private char[][] terrain = new char[mapDim[0]][mapDim[1]];
+	
 	private ArrayList<Physicable> PhysicsList;
 	private CollisionLogic collider;
 	
@@ -50,7 +51,7 @@ public class MapData {
 			}
 			
 			else if (obj instanceof Shooter && ((Shooter) obj).isAlive()) {
-					map[obj.getYfloor()][obj.getXfloor()] = (char)(((Shooter) obj).getID() + '0');
+				map[obj.getYfloor()][obj.getXfloor()] = (char)(((Shooter) obj).getID() + '0');
 			}
 		}
 	}
@@ -92,16 +93,12 @@ public class MapData {
 		return false;
 	}
 	
-	public int nextShooterTurn() {
-		
-		for (int i = getCurrentShooter().getID(); i <= highestAliveShooterID(); i++)
-			if (!getCurrentShooter().equals(getShooter(i)) && getShooter(i).isAlive())
-				return getShooter(i).getID();
-		
-		if (getCurrentShooter().getID() == highestAliveShooterID() && amountOfAliveShooters() > 1)
-			return lowestAliveShooterID();
-		
-		return 0;
+	public boolean hasMovingThings() {
+		for (int k = 0; k < PhysicsList.size(); k++) {
+			if (PhysicsList.get(k).isMoving())
+				return true;
+		}
+		return false;
 	}
 	
 	public int amountOfAliveShooters() {
@@ -113,38 +110,6 @@ public class MapData {
 				amount++;
 		
 		return amount;
-	}
-	
-	private int lowestAliveShooterID() {
-		
-		int id = highestAliveShooterID();
-		
-		for (int k = 0; k < PhysicsList.size(); k++)
-			if (PhysicsList.get(k) instanceof Shooter && 
-				((Shooter) PhysicsList.get(k)).getID() < id && 
-				((Shooter) PhysicsList.get(k)).isAlive())
-				id = ((Shooter) PhysicsList.get(k)).getID();
-		return id;
-	}
-	
-	private int highestAliveShooterID() {
-		
-		int id = 0;
-		
-		for (int k = 0; k < PhysicsList.size(); k++)
-			if (PhysicsList.get(k) instanceof Shooter && 
-				((Shooter) PhysicsList.get(k)).getID() > id && 
-				((Shooter) PhysicsList.get(k)).isAlive())
-				id = ((Shooter) PhysicsList.get(k)).getID();
-		return id;
-	}
-	
-	public boolean hasMovingThings() {
-		for (int k = 0; k < PhysicsList.size(); k++) {
-			if (PhysicsList.get(k).isMoving())
-				return true;
-		}
-		return false;
 	}
 
 	public void addToObservedList(Physicable p) {

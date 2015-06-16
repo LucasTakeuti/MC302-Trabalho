@@ -24,17 +24,19 @@ public class CollisionLogic {
 					damage.doDamage();
 					MapData.getInstance().deleteFromObservedList(obj);
 				}
-				if (hasHitFloorBounds(obj))
+				//deleta o projetil se ele for muito longe
+				else if (hasHitFloorBounds(obj) || ((hasHitRightBounds(obj) || hasHitLeftBounds(obj)) && (Math.floor(obj.getVelY()) == 0)) || 
+					(Physics.distanceofAToB(obj.getXfloor(), obj.getYfloor(), MapData.getInstance().getCurrentShooter().getXfloor(), MapData.getInstance().getCurrentShooter().getYfloor()) > Physics.MAX_PROJECTILE_DISTANCE))
 					MapData.getInstance().deleteFromObservedList(obj);
 			}
 			
 			if (obj instanceof Shooter) {
 				if (hasHitFloorBounds(obj)) {
-					obj.setY(obj.getYfloor()-1);
-					obj.setVelX(0);
+					((Shooter) obj).setAlive(false);
 					obj.setMoving(false);
 					obj.setVisible(false);
-					((Shooter) obj).setAlive(false);
+					obj.setY(obj.getYfloor()-1);
+					obj.setVelX(0);
 				}
 				
 				else if (hasHitRightBounds(obj)) {
@@ -50,10 +52,10 @@ public class CollisionLogic {
 				}
 				
 				else if (hasHitSolid(obj)) {
-					obj.setY(obj.getYfloor()-1);
-					obj.setVelX(0);
 					obj.setMoving(false);
-				}
+					if (hasHitTerrain(obj))
+						obj.setY(obj.getYfloor()-1);
+				}				
 			}
 		}
 	}

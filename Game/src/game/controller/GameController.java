@@ -54,14 +54,18 @@ public class GameController {
 				break;
 			case MAINGAME:
 				data.updateMap();
-				turnCont.nextTurn();
+				turnCont.updateTurn();
+				if (MapData.getInstance().amountOfAliveShooters() <= 1)
+					GameController.getInstance().setCurrentState(GameState.GAMEOVER);
 				//if(stateChangesCondition) THEN change game state
 				break;
 			case PAUSE:
 				//if(stateChangesCondition) THEN change game state
 				break;
 			case GAMEOVER:
+				data.updateMap();
 				System.out.println("gg wp ;)");
+				//System.exit(0);
 				//if(stateChangesCondition) THEN change game state
 				break;
 		}

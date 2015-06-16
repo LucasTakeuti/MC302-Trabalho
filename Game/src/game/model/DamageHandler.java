@@ -17,6 +17,8 @@ public class DamageHandler {
 					if (MapData.getInstance().isShooter(i, j)) {
 						Shooter s = MapData.getInstance().getShooter(MapData.getInstance().getShooterID(i, j));
 						s.setLife(Math.max(0, s.getLife() - damageAmount(Physics.distanceofAToB(j, i, explodable.getXfloor(), explodable.getYfloor()))));
+						if (s.getLife() == 0)
+							s.setAlive(false);
 					}
 	}
 	

@@ -73,7 +73,12 @@ public class Shooter extends Physicable {
 	}
 
 	public void setAlive(boolean b) {
-		setLife(b ? getLife() : 0);
+		if (b)
+			setLife(getLife());
+		else {
+			setLife(0);
+			endTurn();
+		}
 	}
 
 	private boolean hasDoubleJump() {

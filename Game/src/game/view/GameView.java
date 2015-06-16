@@ -56,8 +56,8 @@ public class GameView {
 		//tests - nao apague//
 		panel = new GamePanel();
 		
-		powerField = new JTextField("22", 5);
-		angleField = new JTextField("55", 5);
+		powerField = new JTextField("10", 5);
+		angleField = new JTextField("10", 5);
 		
 		shootButton = new JButton("Shoot!");
 		jumpButton = new JButton("Jump!");
@@ -76,7 +76,7 @@ public class GameView {
 		
 		frame.add(panel);
 		
-		amoutOfShooters = Integer.valueOf(JOptionPane.showInputDialog(new JFrame(), "Amount of Shooters", "2"));
+		amoutOfShooters = Integer.valueOf(JOptionPane.showInputDialog(new JFrame(), "Amount of Shooters:", "2"));
 		
 		shootButton.requestFocus();
 		

@@ -2,6 +2,8 @@ package game.controller;
 
 import java.util.Random;
 
+import javax.crypto.spec.GCMParameterSpec;
+
 import game.model.MapData;
 import game.view.GameView;
 
@@ -33,24 +35,17 @@ public class TurnController {
 		setCurrentTurn(r.nextInt(view.amoutOfShooters) + 1);
 	}
 	
-	/*
 	//TODO: implementar timer
-	//proximo turno: acabou o tempo ou shooter ja atirou e nao ha nada se movendo no mapa
-	private void nextTurn() {
+	public void updateTurn() {
+		// shooter ja atirou E nao ha nada se movendo no mapa
 		if (MapData.getInstance().getCurrentShooter().hasFinishedTurn() && !MapData.getInstance().hasMovingThings()) {
-			setCurrentTurn(MapData.getInstance().nextShooterTurn());
-			if (MapData.getInstance().amountOfAliveShooters() <= 1)
-				setCurrentState(GameState.GAMEOVER);
-			else
-				MapData.getInstance().getCurrentShooter().newTurn();
+			do {
+				setCurrentTurn((getCurrentTurn() % view.amoutOfShooters) + 1);
+			} while (!MapData.getInstance().getCurrentShooter().isAlive() && MapData.getInstance().amountOfAliveShooters() > 1);
+			MapData.getInstance().getCurrentShooter().newTurn();
 		}
-	}*/
-	
-	public void nextTurn() {
-		// TODO Auto-generated method stub
-		
 	}
-
+	
 	public int getCurrentTurn() {
 		return currentTurn;
 	}
