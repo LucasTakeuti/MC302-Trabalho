@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class Shooter extends Physicable {
 	
-	//Campos
 	public static final double MAX_LIFE = 100;
 	
 	private final int ID;
@@ -14,7 +13,6 @@ public class Shooter extends Physicable {
 	private boolean active;
 	private ArrayList<Physicable> shoots;
 	
-	//Constructor
 	public Shooter(int x, int y) {
 		super(x, y);
 		setShoots(new ArrayList<Physicable>());

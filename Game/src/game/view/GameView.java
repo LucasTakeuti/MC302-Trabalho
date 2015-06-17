@@ -9,12 +9,14 @@ import game.view.desenhador.Desenhador;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 
 public class GameView {
 	
@@ -100,5 +102,42 @@ public class GameView {
 		
 		controle.setLifes(vidas.toString());
 		controle.setCurrentTurn("Current Turn: " + Integer.toString(TurnController.getInstance().getCurrentTurn()));
+	}
+	
+	public void renderAsciiConsole() {
+		for (int i = 0; i < data.getMapHeight(); i++)
+			System.out.println(data.getMap()[i]);
+	}
+	
+	public void renderAsciiFrame() {
+		
+		JTextArea screenAscii = new JTextArea();
+		screenAscii.setColumns(data.getMapWidth());
+		screenAscii.setRows(data.getMapHeight());
+		screenAscii.setEditable(false);
+		
+		Font f = new Font("Courier", 3, 10); //monospace, negrito, tamanho 8
+		
+		screenAscii.setFont(f);
+		screenAscii.setBackground(Color.BLACK);
+		screenAscii.setForeground(new Color(255, 255, 255, 200));
+		screenAscii.setSize(data.getMapWidth(), data.getMapHeight());
+		
+		frame.add(screenAscii);
+		
+		StringBuilder s = new StringBuilder();
+		
+		for (int i = 0; i < data.getMapHeight(); i++) {
+			s.append(new String(data.getMap()[i]));
+			s.append(System.getProperty("line.separator"));
+		}
+		
+		String ss = s.toString();
+		
+		screenAscii.setText(ss);
+		
+		//tests
+		//setText("1: " + Double.toString(Math.round(data.getShooter(1).getLife())) + " 2: " + Double.toString(Math.round(data.getShooter(2).getLife())));
+		//currentTurn.setText("Current Turn: " + Integer.toString(TurnController.getInstance().getCurrentTurn()));
 	}
 }
